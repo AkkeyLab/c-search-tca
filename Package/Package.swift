@@ -38,7 +38,6 @@ let package = Package(
             name: "Domain",
             dependencies: [
                 "Data",
-                "APIKit",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .target(
