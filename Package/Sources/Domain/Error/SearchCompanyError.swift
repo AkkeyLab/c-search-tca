@@ -5,7 +5,15 @@
 //  Created by AkkeyLab on 2022/12/30.
 //
 
-public enum SearchCompanyError: Error {
-    case emptyCompanyName
-    case apiKeyNotFound
+import Foundation
+
+public enum SearchCompanyError: String, Error {
+    case emptyCompanyName = "Search string is empty"
+    case apiKeyNotFound = "API Key not found"
+}
+
+extension SearchCompanyError: LocalizedError {
+    public var errorDescription: String? {
+        rawValue
+    }
 }

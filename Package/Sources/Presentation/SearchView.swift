@@ -38,6 +38,19 @@ public struct SearchView: View {
                     Text(company.name)
                 }
             }
+            .errorAlert(error: viewStore.error) {
+                viewStore.send(.confirmedError)
+            }
+        }
+    }
+}
+
+private extension View {
+    func errorAlert(error: LocalizedAlertError?, buttonTitle: String = "OK", action: @escaping () -> Void) -> some View {
+        alert(isPresented: .constant(error != nil), error: error) { _ in
+            Button(buttonTitle, action: action)
+        } message: { error in
+            Text(error.recoverySuggestion ?? "")
         }
     }
 }

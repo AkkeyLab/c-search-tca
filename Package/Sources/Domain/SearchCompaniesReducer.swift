@@ -9,7 +9,13 @@ import ComposableArchitecture
 
 public struct SearchCompaniesReducer: ReducerProtocol {
     public struct State: Equatable {
+        public static func == (lhs: SearchCompaniesReducer.State, rhs: SearchCompaniesReducer.State) -> Bool {
+            lhs.companies == rhs.companies
+            && lhs.error.debugDescription == rhs.error.debugDescription
+        }
+
         public var companies: [Company]
+        public var error: LocalizedAlertError?
 
         public init(companies: [Company] = []) {
             self.companies = companies
@@ -19,6 +25,7 @@ public struct SearchCompaniesReducer: ReducerProtocol {
     public enum Action: Equatable {
         case search(companyName: String)
         case searchResponse(TaskResult<[Company]>)
+        case confirmedError
     }
 
     @Dependency(\.searchCompaniesUseCase) var searchCompaniesUseCase
@@ -36,7 +43,10 @@ public struct SearchCompaniesReducer: ReducerProtocol {
                 state.companies = companies
                 return .none
             case let .searchResponse(.failure(error)):
-                debugPrint(error)
+                state.error = LocalizedAlertError(error: error)
+                return .none
+            case .confirmedError:
+                state.error = nil
                 return .none
             }
         }
