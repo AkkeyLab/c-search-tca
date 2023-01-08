@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F4A283A8296B47010040608F /* c-search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "c-search-Info.plist"; sourceTree = "<group>"; };
 		F4C37D30296AEE2100D0084B /* c-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "c-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C37D33296AEE2100D0084B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		F4C37D37296AEE2200D0084B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,6 +44,7 @@
 		F4C37D27296AEE2100D0084B = {
 			isa = PBXGroup;
 			children = (
+				F4A283A8296B47010040608F /* c-search-Info.plist */,
 				F4C37D44296AF1AB00D0084B /* Package */,
 				F4C37D32296AEE2100D0084B /* App */,
 				F4C37D31296AEE2100D0084B /* Products */,
@@ -280,6 +282,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"App/PreviewContent\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "c-search-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -308,6 +311,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"App/PreviewContent\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "c-search-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

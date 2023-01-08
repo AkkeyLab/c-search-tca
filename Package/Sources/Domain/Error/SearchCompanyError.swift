@@ -7,4 +7,5 @@
 
 public enum SearchCompanyError: Error {
     case emptyCompanyName
+    case apiKeyNotFound
 }

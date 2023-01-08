@@ -29,7 +29,10 @@ public final class SearchCompaniesGateway: SearchCompaniesGatewayProtocol {
         guard let fullWidthString = name.applyingTransform(.fullwidthToHalfwidth, reverse: true) else {
             throw SearchCompanyError.emptyCompanyName
         }
-        let apiKey = "" // TODO
+        let key = "National Tax Agency API Key"
+        guard let apiKey = Bundle.main.object(forInfoDictionaryKey: key) as? String, !apiKey.isEmpty else {
+            throw  SearchCompanyError.apiKeyNotFound
+        }
         let request = CompaniesRequest(
             apiKey: apiKey,
             name: fullWidthString,
