@@ -9,13 +9,24 @@ Experiment with an **engaging approach** for iOS app development
 ```mermaid
 flowchart TB
   subgraph Project
-    App<-->A
+    App<-->View
     subgraph Package
-      A[Some Module]
+      subgraph Presentation Layer
+        ViewStore(ViewStore)-->View
+        View-->Action
+      end
+      subgraph Domain Layer
+        State(State)-->ViewStore
+        Reducer(Reducer)-->State
+        Action(Action)-->Reducer
+        Reducer-->Effect
+        Effect(Effect)-->Action
+        UseCase<-->Effect
+        UseCase<-->Gateway
+      end
+      subgraph Data Layer
+        ApiRequest<-->Gateway
+      end
     end
-  end
-  subgraph Third Party
-    A<-->E[Some Packages]
-    A<-->F[swift-composable-architecture]
   end
 ```
