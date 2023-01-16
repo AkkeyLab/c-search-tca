@@ -49,6 +49,7 @@ let package = Package(
         .testTarget(
             name: "PackageTests",
             dependencies: [
+                "Data",
                 "Domain",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),

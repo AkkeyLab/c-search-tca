@@ -1,10 +1,11 @@
 import ComposableArchitecture
 import XCTest
+@testable import Data
 @testable import Domain
 
 final class PackageTests: XCTestCase {
     @MainActor
-    func testSearchCompaniesReducer() async {
+    func testSuccessSearchCompaniesReducer() async {
         let store = TestStore(
             initialState: SearchCompaniesReducer.State(),
             reducer: SearchCompaniesReducer()
@@ -26,6 +27,41 @@ final class PackageTests: XCTestCase {
 
         await store.receive(.searchResponse(.success([company]))) {
             $0.companies = [company]
+        }
+    }
+
+    @MainActor
+    func testFailureSearchCompaniesReducer() async {
+        enum TestError: String, Error, LocalizedError {
+            case test
+
+            var errorDescription: String? {
+                rawValue
+            }
+        }
+
+        struct FailureGatewayMock: SearchCompaniesGatewayProtocol {
+            func search(name: String) async throws -> CompaniesEntity {
+                throw TestError.test
+            }
+        }
+
+        let store = TestStore(
+            initialState: SearchCompaniesReducer.State(),
+            reducer: SearchCompaniesReducer()
+                .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: FailureGatewayMock()))
+        )
+
+        await store.send(.search(companyName: ""))
+
+        await store.receive(.searchResponse(.failure(TestError.test))) {
+            $0.companies = []
+            $0.error = LocalizedAlertError(error: TestError.test)
+        }
+
+        await store.send(.confirmedError) {
+            $0.companies = []
+            $0.error = nil
         }
     }
 }
