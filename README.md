@@ -30,3 +30,16 @@ flowchart TB
     end
   end
 ```
+
+## Testing
+```mermaid
+flowchart LR
+  ApiRequest--Decode test-->Gateway
+  Gateway --Exchange test--> UseCase
+  UseCase-.-Effect(Effect)
+  subgraph Reducer
+    Action(Action)--Business logic test-->State(State)
+    Action-.->Effect
+  end
+  Effect-.->Action
+```

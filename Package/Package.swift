@@ -51,7 +51,6 @@ let package = Package(
             dependencies: [
                 "Data",
                 "Domain",
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
     ]
 )
