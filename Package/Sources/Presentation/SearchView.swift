@@ -24,11 +24,11 @@ public struct SearchView: View {
                 List(viewStore.companies, id: \.id, selection: $selectedCompany) { company in
                     NavigationLink(company.name, value: company)
                 }
-                .navigationTitle("Corporations")
+                .navigationTitle(L10n.NavigationTitle.corporations)
                 .searchable(
                     text: $searchText,
                     placement: .navigationBarDrawer(displayMode: .always),
-                    prompt: Text("Enter company name")
+                    prompt: Text(L10n.Placeholder.enterCompanyName)
                 )
                 .onSubmit(of: .search) {
                     viewStore.send(.search(companyName: searchText))
@@ -46,7 +46,7 @@ public struct SearchView: View {
 }
 
 private extension View {
-    func errorAlert(error: LocalizedAlertError?, buttonTitle: String = "OK", action: @escaping () -> Void) -> some View {
+    func errorAlert(error: LocalizedAlertError?, buttonTitle: String = L10n.Common.ok, action: @escaping () -> Void) -> some View {
         alert(isPresented: .constant(error != nil), error: error) { _ in
             Button(buttonTitle, action: action)
         } message: { error in
