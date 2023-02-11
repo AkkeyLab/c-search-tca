@@ -2,7 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>National Tax Agency API Key</key>
-	<string></string>
+	<key>LSEnvironment</key>
+	<dict>
+		<key>NATIONAL_TAX_AGENCY_API_KEY</key>
+		<string>$(NTA_API_KEY)</string>
+	</dict>
 </dict>
 </plist>

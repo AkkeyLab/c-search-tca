@@ -43,3 +43,8 @@ flowchart LR
   end
   Effect-.->Action
 ```
+
+## Set environment variables
+```sh
+security add-generic-password -a NATIONAL-TAX-AGENCY -w ${NTA_API_KEY} -s NTA-API-KEY
+```
