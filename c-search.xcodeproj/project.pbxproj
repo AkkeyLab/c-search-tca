@@ -172,7 +172,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NTA_API_KEY=\"$(security find-generic-password -a NATIONAL-TAX-AGENCY -s NTA-API-KEY -w)\"\nif [ ! \"${NTA_API_KEY}\" ];then\n    echo \"error: NTA_API_KEY does not exist in Keychain Access\"\nfi\n/usr/libexec/PlistBuddy -c \"Set:LSEnvironment:NATIONAL_TAX_AGENCY_API_KEY ${NTA_API_KEY}\" \"${TEMP_DIR}/Preprocessed-Info.plist\"\n";
+			shellScript = "if [ ! \"${NTA_API_KEY}\" ];then\n    export NTA_API_KEY=\"$(security find-generic-password -a NATIONAL-TAX-AGENCY -s NTA-API-KEY -w)\"\nfi\nif [ ! \"${NTA_API_KEY}\" ];then\n    echo \"error: NTA_API_KEY does not exist in Keychain Access\"\nfi\n/usr/libexec/PlistBuddy -c \"Set:LSEnvironment:NATIONAL_TAX_AGENCY_API_KEY ${NTA_API_KEY}\" \"${TEMP_DIR}/Preprocessed-Info.plist\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
