@@ -10,9 +10,21 @@ import SwiftUI
 
 @main
 struct SearchApp: App {
+    @State private var searchText: String = ""
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(searchText: $searchText)
+                .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
+                    guard let incomingURL = userActivity.webpageURL,
+                          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
+                          let queryItems = components.queryItems,
+                          let companyName = queryItems.first(where: { $0.name == "name" })?.value
+                    else {
+                        return
+                    }
+                    searchText = companyName
+                }
         }
     }
 }
