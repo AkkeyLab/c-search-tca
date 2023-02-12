@@ -10,7 +10,11 @@ import Domain
 import SwiftUI
 
 public struct ContentView: View {
-    public init() {}
+    @Binding private var searchText: String
+
+    public init(searchText: Binding<String>) {
+        _searchText = searchText
+    }
 
     public var body: some View {
         SearchView(
@@ -18,7 +22,8 @@ public struct ContentView: View {
                 initialState: SearchCompaniesReducer.State(),
                 reducer: SearchCompaniesReducer()
                     .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase())
-            )
+            ),
+            searchText: $searchText
         )
     }
 }

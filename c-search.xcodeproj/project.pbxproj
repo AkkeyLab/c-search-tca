@@ -12,7 +12,36 @@
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
+		F4FDC7EF2998D9A00057D80A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDC7EE2998D9A00057D80A /* App.swift */; };
+		F4FDC7F32998D9A10057D80A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F22998D9A10057D80A /* Assets.xcassets */; };
+		F4FDC7F62998D9A10057D80A /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F52998D9A10057D80A /* PreviewAssets.xcassets */; };
+		F4FDC7FC2998D9A10057D80A /* c-search-clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = F4FDC7EC2998D9A00057D80A /* c-search-clip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F4FDC8042998EEA90057D80A /* Clip in Frameworks */ = {isa = PBXBuildFile; productRef = F4FDC8032998EEA90057D80A /* Clip */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F4FDC7F92998D9A10057D80A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4C37D28296AEE2100D0084B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F4FDC7EB2998D9A00057D80A;
+			remoteInfo = "c-search-clip";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F4FDC7FB2998D9A10057D80A /* Embed App Clips */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/AppClips";
+			dstSubfolderSpec = 16;
+			files = (
+				F4FDC7FC2998D9A10057D80A /* c-search-clip.app in Embed App Clips */,
+			);
+			name = "Embed App Clips";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F4050950297C501A00C25459 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -23,6 +52,12 @@
 		F4C37D37296AEE2200D0084B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreviewAssets.xcassets; sourceTree = "<group>"; };
 		F4C37D44296AF1AB00D0084B /* Package */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Package; sourceTree = "<group>"; };
+		F4FDC7EC2998D9A00057D80A /* c-search-clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "c-search-clip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4FDC7EE2998D9A00057D80A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		F4FDC7F22998D9A10057D80A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F4FDC7F52998D9A10057D80A /* PreviewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreviewAssets.xcassets; sourceTree = "<group>"; };
+		F4FDC7F72998D9A10057D80A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4FDC7F82998D9A10057D80A /* AppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppClip.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +66,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4A283A7296AF47E0040608F /* Presentation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4FDC7E92998D9A00057D80A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FDC8042998EEA90057D80A /* Clip in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +93,7 @@
 				F4A283A8296B47010040608F /* c-search-Info.plist */,
 				F4C37D44296AF1AB00D0084B /* Package */,
 				F4C37D32296AEE2100D0084B /* App */,
+				F4FDC7ED2998D9A00057D80A /* AppClip */,
 				F4C37D31296AEE2100D0084B /* Products */,
 				F4A283A5296AF47E0040608F /* Frameworks */,
 			);
@@ -59,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				F4C37D30296AEE2100D0084B /* c-search.app */,
+				F4FDC7EC2998D9A00057D80A /* c-search-clip.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +127,26 @@
 			path = PreviewContent;
 			sourceTree = "<group>";
 		};
+		F4FDC7ED2998D9A00057D80A /* AppClip */ = {
+			isa = PBXGroup;
+			children = (
+				F4FDC7EE2998D9A00057D80A /* App.swift */,
+				F4FDC7F22998D9A10057D80A /* Assets.xcassets */,
+				F4FDC7F72998D9A10057D80A /* Info.plist */,
+				F4FDC7F82998D9A10057D80A /* AppClip.entitlements */,
+				F4FDC7F42998D9A10057D80A /* PreviewContent */,
+			);
+			path = AppClip;
+			sourceTree = "<group>";
+		};
+		F4FDC7F42998D9A10057D80A /* PreviewContent */ = {
+			isa = PBXGroup;
+			children = (
+				F4FDC7F52998D9A10057D80A /* PreviewAssets.xcassets */,
+			);
+			path = PreviewContent;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,10 +158,12 @@
 				F4C37D2D296AEE2100D0084B /* Frameworks */,
 				F4FDC7E729979DDB0057D80A /* Setting Environment Variables */,
 				F4C37D2E296AEE2100D0084B /* Resources */,
+				F4FDC7FB2998D9A10057D80A /* Embed App Clips */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F4FDC7FA2998D9A10057D80A /* PBXTargetDependency */,
 			);
 			name = "c-search";
 			packageProductDependencies = (
@@ -105,6 +172,27 @@
 			productName = "c-search";
 			productReference = F4C37D30296AEE2100D0084B /* c-search.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F4FDC7EB2998D9A00057D80A /* c-search-clip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4FDC7FF2998D9A10057D80A /* Build configuration list for PBXNativeTarget "c-search-clip" */;
+			buildPhases = (
+				F4FDC7E82998D9A00057D80A /* Sources */,
+				F4FDC7E92998D9A00057D80A /* Frameworks */,
+				F4FDC8022998E0F70057D80A /* Setting Environment Variables */,
+				F4FDC7EA2998D9A00057D80A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "c-search-clip";
+			packageProductDependencies = (
+				F4FDC8032998EEA90057D80A /* Clip */,
+			);
+			productName = "c-search-clip";
+			productReference = F4FDC7EC2998D9A00057D80A /* c-search-clip.app */;
+			productType = "com.apple.product-type.application.on-demand-install-capable";
 		};
 /* End PBXNativeTarget section */
 
@@ -117,6 +205,9 @@
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					F4C37D2F296AEE2100D0084B = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					F4FDC7EB2998D9A00057D80A = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
@@ -136,6 +227,7 @@
 			projectRoot = "";
 			targets = (
 				F4C37D2F296AEE2100D0084B /* c-search */,
+				F4FDC7EB2998D9A00057D80A /* c-search-clip */,
 			);
 		};
 /* End PBXProject section */
@@ -148,6 +240,15 @@
 				F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */,
 				F405094F297C501A00C25459 /* Localizable.strings in Resources */,
 				F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4FDC7EA2998D9A00057D80A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FDC7F62998D9A10057D80A /* PreviewAssets.xcassets in Resources */,
+				F4FDC7F32998D9A10057D80A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +275,26 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ! \"${NTA_API_KEY}\" ];then\n    export NTA_API_KEY=\"$(security find-generic-password -a NATIONAL-TAX-AGENCY -s NTA-API-KEY -w)\"\nfi\nif [ ! \"${NTA_API_KEY}\" ];then\n    echo \"error: NTA_API_KEY does not exist in Keychain Access\"\nfi\n/usr/libexec/PlistBuddy -c \"Set:LSEnvironment:NATIONAL_TAX_AGENCY_API_KEY ${NTA_API_KEY}\" \"${TEMP_DIR}/Preprocessed-Info.plist\"\n";
 		};
+		F4FDC8022998E0F70057D80A /* Setting Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Preprocessed-Info.plist",
+			);
+			name = "Setting Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! \"${NTA_API_KEY}\" ];then\n    export NTA_API_KEY=\"$(security find-generic-password -a NATIONAL-TAX-AGENCY -s NTA-API-KEY -w)\"\nfi\nif [ ! \"${NTA_API_KEY}\" ];then\n    echo \"error: NTA_API_KEY does not exist in Keychain Access\"\nfi\nif [ ! \"${TEMP_DIR}/Preprocessed-Info.plist\" ];then\n    echo \"error: Info.plist does not exist in ${TEMP_DIR}\"\nfi\n/usr/libexec/PlistBuddy -c \"Set:LSEnvironment:NATIONAL_TAX_AGENCY_API_KEY ${NTA_API_KEY}\" \"${TEMP_DIR}/Preprocessed-Info.plist\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -185,7 +306,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4FDC7E82998D9A00057D80A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4FDC7EF2998D9A00057D80A /* App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F4FDC7FA2998D9A10057D80A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F4FDC7EB2998D9A00057D80A /* c-search-clip */;
+			targetProxy = F4FDC7F92998D9A10057D80A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F4050951297C501A00C25459 /* Localizable.strings */ = {
@@ -319,6 +456,7 @@
 		F4C37D3F296AEE2200D0084B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -350,6 +488,7 @@
 		F4C37D40296AEE2200D0084B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -378,6 +517,72 @@
 			};
 			name = Release;
 		};
+		F4FDC7FD2998D9A10057D80A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppClip/AppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AppClip/PreviewContent\"";
+				DEVELOPMENT_TEAM = Y6Y8U7YGDU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "c-search";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search.Clip";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F4FDC7FE2998D9A10057D80A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AppClip/AppClip.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AppClip/PreviewContent\"";
+				DEVELOPMENT_TEAM = Y6Y8U7YGDU;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AppClip/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "c-search";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_PREPROCESS = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search.Clip";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -399,12 +604,25 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		F4FDC7FF2998D9A10057D80A /* Build configuration list for PBXNativeTarget "c-search-clip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4FDC7FD2998D9A10057D80A /* Debug */,
+				F4FDC7FE2998D9A10057D80A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		F4A283A6296AF47E0040608F /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Presentation;
+		};
+		F4FDC8032998EEA90057D80A /* Clip */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Clip;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

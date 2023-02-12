@@ -12,10 +12,11 @@ import SwiftUI
 public struct SearchView: View {
     private let store: StoreOf<SearchCompaniesReducer>
     @State private var selectedCompany: Company?
-    @State private var searchText: String = ""
+    @Binding private var searchText: String
 
-    public init(store: StoreOf<SearchCompaniesReducer>) {
+    public init(store: StoreOf<SearchCompaniesReducer>, searchText: Binding<String>) {
         self.store = store
+        self._searchText = searchText
     }
 
     public var body: some View {
@@ -62,7 +63,8 @@ private struct SearchViewwPreviews: PreviewProvider {
                 initialState: SearchCompaniesReducer.State(),
                 reducer: SearchCompaniesReducer()
                     .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: SearchCompaniesGatewayMock()))
-            )
+            ),
+            searchText: .constant("")
         )
     }
 }

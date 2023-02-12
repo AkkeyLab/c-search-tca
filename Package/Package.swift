@@ -22,6 +22,9 @@ let package = Package(
         .library(
             name: "Extension",
             targets: ["Extension"]),
+        .library(
+            name: "Clip",
+            targets: ["Clip"]),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.48.0"),
@@ -54,6 +57,12 @@ let package = Package(
         .target(
             name: "Extension",
             dependencies: []),
+        .target(
+            name: "Clip",
+            dependencies: [
+                "Domain",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]),
         .testTarget(
             name: "PackageTests",
             dependencies: [

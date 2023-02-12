@@ -1,29 +1,34 @@
 //
 //  App.swift
-//  c-search
+//  c-search-clip
 //
-//  Created by AkkeyLab on 2023/01/08.
+//  Created by AkkeyLab on 2023/02/12.
 //
 
-import Presentation
+import Clip
 import SwiftUI
 
 @main
-struct SearchApp: App {
-    @State private var searchText: String = ""
+struct SearchClipApp: App {
+    @State private var companyName: String?
 
     var body: some Scene {
         WindowGroup {
-            ContentView(searchText: $searchText)
+            Color(uiColor: .systemBackground)
+                .overlay {
+                    if let companyName {
+                        ClipView(companyName: companyName)
+                    }
+                }
                 .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
                     guard let incomingURL = userActivity.webpageURL,
                           let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true),
                           let queryItems = components.queryItems,
-                          let companyName = queryItems.first(where: { $0.name == "name" })?.value
+                          let nameQueryItem = queryItems.first(where: { $0.name == "name" })
                     else {
                         return
                     }
-                    searchText = companyName
+                    companyName = nameQueryItem.value
                 }
         }
     }
