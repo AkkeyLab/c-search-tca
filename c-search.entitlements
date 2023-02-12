@@ -2,12 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIconName</key>
-	<string>AppIcon</string>
-	<key>LSEnvironment</key>
-	<dict>
-		<key>NATIONAL_TAX_AGENCY_API_KEY</key>
-		<string>$(NTA_API_KEY)</string>
-	</dict>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>search.akkeylab.com</string>
+	</array>
 </dict>
 </plist>
