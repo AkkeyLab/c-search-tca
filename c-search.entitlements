@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>search.akkeylab.com</string>
+		<string>appclips:search.akkeylab.com</string>
 	</array>
 </dict>
 </plist>
