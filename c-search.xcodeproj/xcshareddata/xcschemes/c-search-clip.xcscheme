@@ -53,7 +53,7 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCAppClipURL"
-            value = "https://search.akkeylab.com/company?name=akkeylab"
+            value = "https://akkeylab.com/company?name=akkeylab"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
