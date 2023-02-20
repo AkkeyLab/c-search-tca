@@ -36,7 +36,7 @@ public struct SearchView: View {
                 }
             } detail: {
                 if let company = selectedCompany {
-                    Text(company.name)
+                    CompanyView(company: company)
                 }
             }
             .errorAlert(error: viewStore.error) {
