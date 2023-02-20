@@ -5,14 +5,39 @@
 //  Created by AkkeyLab on 2023/02/21.
 //
 
+import ComposableArchitecture
 import Domain
+import MapKit
 import SwiftUI
 
 struct CompanyView: View {
-    let company: Company
+    private let store: StoreOf<CompanyReducer>
+
+    public init(store: StoreOf<CompanyReducer>) {
+        self.store = store
+    }
 
     var body: some View {
-        Text(company.name)
+        WithViewStore(store) { viewStore in
+            VStack {
+                Text(viewStore.company.name)
+                ForEach(viewStore.binding(get: { $0.regions }, send: .geocode), id: \.id) { region in
+                    Map(
+                        coordinateRegion: region,
+                        annotationItems: [region],
+                        annotationContent: { location in
+                            MapMarker(coordinate: location.center.wrappedValue)
+                        }
+                    )
+                }
+            }
+            .onAppear {
+                viewStore.send(.geocode)
+            }
+            .errorAlert(error: viewStore.error) {
+                viewStore.send(.confirmedError)
+            }
+        }
     }
 }
 

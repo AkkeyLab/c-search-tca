@@ -36,7 +36,12 @@ public struct SearchView: View {
                 }
             } detail: {
                 if let company = selectedCompany {
-                    CompanyView(company: company)
+                    CompanyView(
+                        store: Store(
+                            initialState: CompanyReducer.State(company: company),
+                            reducer: CompanyReducer()
+                        )
+                    )
                 }
             }
             .errorAlert(error: viewStore.error) {
@@ -46,7 +51,7 @@ public struct SearchView: View {
     }
 }
 
-private extension View {
+extension View {
     func errorAlert(error: LocalizedAlertError?, buttonTitle: String = L10n.Common.ok, action: @escaping () -> Void) -> some View {
         alert(isPresented: .constant(error != nil), error: error) { _ in
             Button(buttonTitle, action: action)
