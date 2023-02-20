@@ -14,15 +14,6 @@ let package = Package(
             name: "Presentation",
             targets: ["Presentation"]),
         .library(
-            name: "Domain",
-            targets: ["Domain"]),
-        .library(
-            name: "Data",
-            targets: ["Data"]),
-        .library(
-            name: "Extension",
-            targets: ["Extension"]),
-        .library(
             name: "Clip",
             targets: ["Clip"]),
     ],
