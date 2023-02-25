@@ -266,7 +266,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Preprocessed-Info.plist",
+				"$(TEMP_DIR)/Preprocessed-Info.plist",
 			);
 			name = "Setting Environment Variables";
 			outputFileListPaths = (
@@ -286,7 +286,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Preprocessed-Info.plist",
+				"$(TEMP_DIR)/Preprocessed-Info.plist",
 			);
 			name = "Setting Environment Variables";
 			outputFileListPaths = (
