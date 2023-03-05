@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Data
 import Domain
 import MapKit
 import SwiftUI
@@ -44,8 +45,14 @@ public struct CompanyView: View {
     }
 }
 
-//struct CompanyViewPreviews: PreviewProvider {
-//    static var previews: some View {
-//        CompanyView(company: <#Company#>)
-//    }
-//}
+struct CompanyViewPreviews: PreviewProvider {
+    static var previews: some View {
+        CompanyView(
+            store: Store(
+                initialState: CompanyReducer.State(company: Company.mock),
+                reducer: CompanyReducer()
+                    .dependency(\.geocodeUseCase, GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock()))
+            )
+        )
+    }
+}

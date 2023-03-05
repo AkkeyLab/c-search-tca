@@ -8,15 +8,22 @@
 import CoreLocation
 import Data
 
+public protocol CLGeocoderProtocol {
+    func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLPlacemark]
+}
+
 public protocol GeocodeUseCaseProtocol {
     func geocodeCompanyAddress(_ company: Company) async throws -> [CLLocationCoordinate2D]
 }
 
 public final class GeocodeUseCase: GeocodeUseCaseProtocol {
-    private let geocoder = CLGeocoder()
-    private let repository = CompanyAddressRepository.shared
+    private let geocoder: CLGeocoderProtocol
+    private let repository: CompanyAddressRepositoryProtocol
 
-    public init() {}
+    public init(geocoder: CLGeocoderProtocol = CLGeocoder(), repository: CompanyAddressRepositoryProtocol = CompanyAddressRepository.shared) {
+        self.geocoder = geocoder
+        self.repository = repository
+    }
 
     public func geocodeCompanyAddress(_ company: Company) async throws -> [CLLocationCoordinate2D] {
         let address = company.prefectureName + company.cityName + company.streetNumber
@@ -52,3 +59,5 @@ public final class GeocodeUseCase: GeocodeUseCaseProtocol {
 private extension Locale {
     static let jp = Locale(identifier: "ja_JP")
 }
+
+extension CLGeocoder: CLGeocoderProtocol {}

@@ -6,6 +6,7 @@
 //
 
 import ComposableArchitecture
+import Data
 import Domain
 import MapKit
 
@@ -88,7 +89,7 @@ extension CLLocationCoordinate2D: Equatable {
 }
 
 extension GeocodeUseCase: TestDependencyKey {
-    public static var testValue = GeocodeUseCase()
+    public static var testValue = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
 }
 
 extension DependencyValues {

@@ -7,7 +7,13 @@
 
 import CoreData
 
-public final class CompanyAddressRepository {
+public protocol CompanyAddressRepositoryProtocol {
+    func load<T: CompanyAddressEntity>() throws -> [T]
+    func append(address: String, latitude: Double, longitude: Double) throws
+    func saveIfNeeded() throws
+}
+
+public final class CompanyAddressRepository: CompanyAddressRepositoryProtocol {
     // https://blog.ch3cooh.jp/entry/2022/01/03/210300
     private let modelFileURL = Bundle.module.url(forResource: "Model", withExtension: "momd")!
     private lazy var container = NSPersistentContainer(

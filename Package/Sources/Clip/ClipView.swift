@@ -38,7 +38,7 @@ public struct ClipView: View {
                             store: Store(
                                 initialState: CompanyReducer.State(company: company),
                                 reducer: CompanyReducer()
-                                    .dependency(\.geocodeUseCase, GeocodeUseCase()) // TODO: DI
+                                    .dependency(\.geocodeUseCase, GeocodeUseCase())
                             )
                         )
                     }
