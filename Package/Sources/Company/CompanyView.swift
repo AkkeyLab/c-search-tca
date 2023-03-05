@@ -21,14 +21,17 @@ public struct CompanyView: View {
         WithViewStore(store) { viewStore in
             VStack {
                 Text(viewStore.company.name)
-                ForEach(viewStore.binding(get: { $0.regions }, send: .geocode), id: \.id) { region in
+                ForEach(viewStore.regions) { region in
                     Map(
-                        coordinateRegion: region,
+                        coordinateRegion: .constant(region),
                         annotationItems: [region],
                         annotationContent: { location in
-                            MapMarker(coordinate: location.center.wrappedValue)
+                            MapMarker(coordinate: location.center)
                         }
                     )
+                }
+                ForEach(viewStore.regions) { region in
+
                 }
             }
             .onAppear {
