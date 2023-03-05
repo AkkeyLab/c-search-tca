@@ -44,19 +44,9 @@ public struct SearchView: View {
                     )
                 }
             }
-            .errorAlert(error: viewStore.error) {
+            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
-        }
-    }
-}
-
-extension View {
-    func errorAlert(error: LocalizedAlertError?, buttonTitle: String = L10n.Common.ok, action: @escaping () -> Void) -> some View {
-        alert(isPresented: .constant(error != nil), error: error) { _ in
-            Button(buttonTitle, action: action)
-        } message: { error in
-            Text(error.recoverySuggestion ?? "")
         }
     }
 }

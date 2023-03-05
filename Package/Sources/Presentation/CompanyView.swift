@@ -34,7 +34,7 @@ struct CompanyView: View {
             .onAppear {
                 viewStore.send(.geocode)
             }
-            .errorAlert(error: viewStore.error) {
+            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
         }
