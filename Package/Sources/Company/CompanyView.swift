@@ -31,9 +31,6 @@ public struct CompanyView: View {
                         }
                     )
                 }
-                ForEach(viewStore.regions) { region in
-
-                }
             }
             .onAppear {
                 viewStore.send(.geocode)
