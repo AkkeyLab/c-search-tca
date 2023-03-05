@@ -14,7 +14,7 @@ public protocol GeocodeUseCaseProtocol {
 
 public final class GeocodeUseCase: GeocodeUseCaseProtocol {
     private let geocoder = CLGeocoder()
-    private let repository = CompanyAddressRepository()
+    private let repository = CompanyAddressRepository.shared
 
     public init() {}
 
@@ -22,13 +22,11 @@ public final class GeocodeUseCase: GeocodeUseCaseProtocol {
         let address = company.prefectureName + company.cityName + company.streetNumber
         let cache = try loadFromCache(address: address)
         guard cache.isEmpty else {
-            debugPrint("Use cache")
             return cache
         }
         let placemarks = try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
         let coordinate = placemarks.compactMap(\.location?.coordinate)
         try? createCache(address: address, coordinate: coordinate)
-        debugPrint("Use generate value")
         return coordinate
     }
 

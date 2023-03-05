@@ -15,7 +15,11 @@ public final class CompanyAddressRepository {
         managedObjectModel: NSManagedObjectModel(contentsOf: modelFileURL)!
     )
 
-    public init() {}
+    public static let shared = CompanyAddressRepository()
+
+    private init() {
+        container.loadPersistentStores { _, _ in }
+    }
 
     public func load<T: CompanyAddressEntity>() throws -> [T] {
         let request = NSFetchRequest<T>(entityName: String(describing: T.self))
