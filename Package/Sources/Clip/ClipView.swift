@@ -5,6 +5,7 @@
 //  Created by AkkeyLab on 2023/02/12.
 //
 
+import Company
 import ComposableArchitecture
 import Domain
 import SwiftUI
@@ -33,7 +34,12 @@ public struct ClipView: View {
                 }
                 .overlay {
                     if let company = viewStore.companies.first {
-                        Text(company.name)
+                        CompanyView(
+                            store: Store(
+                                initialState: CompanyReducer.State(company: company),
+                                reducer: CompanyReducer()
+                            )
+                        )
                     }
                 }
         }

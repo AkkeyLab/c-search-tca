@@ -10,14 +10,14 @@ import Domain
 import MapKit
 import SwiftUI
 
-struct CompanyView: View {
+public struct CompanyView: View {
     private let store: StoreOf<CompanyReducer>
 
     public init(store: StoreOf<CompanyReducer>) {
         self.store = store
     }
 
-    var body: some View {
+    public var body: some View {
         WithViewStore(store) { viewStore in
             VStack {
                 Text(viewStore.company.name)
@@ -34,7 +34,7 @@ struct CompanyView: View {
             .onAppear {
                 viewStore.send(.geocode)
             }
-            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
+            .errorAlert(error: viewStore.error, buttonTitle: "OK") {
                 viewStore.send(.confirmedError)
             }
         }

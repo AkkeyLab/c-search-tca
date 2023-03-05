@@ -17,7 +17,7 @@ public struct LocalizedAlertError: LocalizedError {
         underlyingError.recoverySuggestion
     }
 
-    init?(error: Error?) {
+    public init?(error: Error?) {
         guard let localizedError = error as? LocalizedError else { return nil }
         underlyingError = localizedError
     }

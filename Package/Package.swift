@@ -28,6 +28,7 @@ let package = Package(
             name: "Presentation",
             dependencies: [
                 "Domain",
+                "Company",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ],
             resources: [
@@ -35,6 +36,12 @@ let package = Package(
             ],
             plugins: [
                 .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+            ]),
+        .target(
+            name: "Company",
+            dependencies: [
+                "Domain",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .target(
             name: "Domain",
@@ -52,6 +59,7 @@ let package = Package(
             name: "Clip",
             dependencies: [
                 "Domain",
+                "Company",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .testTarget(
