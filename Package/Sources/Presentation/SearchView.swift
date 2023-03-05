@@ -5,6 +5,7 @@
 //  Created by AkkeyLab on 2023/01/09.
 //
 
+import Company
 import ComposableArchitecture
 import Domain
 import SwiftUI
@@ -36,22 +37,18 @@ public struct SearchView: View {
                 }
             } detail: {
                 if let company = selectedCompany {
-                    Text(company.name)
+                    CompanyView(
+                        store: Store(
+                            initialState: CompanyReducer.State(company: company),
+                            reducer: CompanyReducer()
+                                .dependency(\.geocodeUseCase, GeocodeUseCase())
+                        )
+                    )
                 }
             }
-            .errorAlert(error: viewStore.error) {
+            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
-        }
-    }
-}
-
-private extension View {
-    func errorAlert(error: LocalizedAlertError?, buttonTitle: String = L10n.Common.ok, action: @escaping () -> Void) -> some View {
-        alert(isPresented: .constant(error != nil), error: error) { _ in
-            Button(buttonTitle, action: action)
-        } message: { error in
-            Text(error.recoverySuggestion ?? "")
         }
     }
 }
