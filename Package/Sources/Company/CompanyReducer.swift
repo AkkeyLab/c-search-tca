@@ -28,27 +28,25 @@ public struct CompanyReducer: ReducerProtocol {
 
     public enum Action: Equatable {
         case geocode
-        case geocodeResponse(TaskResult<[CLPlacemark]>)
+        case geocodeResponse(TaskResult<[CLLocationCoordinate2D]>)
         case confirmedError
     }
 
-    private let geocoder = CLGeocoder()
+    @Dependency(\.geocodeUseCase) var geocodeUseCase
 
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
             case .geocode:
                 let company = state.company
-                let address = company.prefectureName + company.cityName + company.streetNumber
                 return .task {
                     await .geocodeResponse(TaskResult {
-                        try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
+                        try await geocodeUseCase.geocodeCompanyAddress(company)
                     })
                 }
-            case let .geocodeResponse(.success(placemarks)):
+            case let .geocodeResponse(.success(coordinate)):
                 let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-                state.regions = placemarks
-                    .compactMap(\.location?.coordinate)
+                state.regions = coordinate
                     .map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) }
                     .map { MKCoordinateRegion(center: $0, span: span) }
                 return .none
@@ -77,6 +75,25 @@ extension MKCoordinateRegion: Equatable {
     }
 }
 
-private extension Locale {
-    static let jp = Locale(identifier: "ja_JP")
+extension CLLocationCoordinate2D: Identifiable {
+    public var id: String {
+        "\(latitude)\(longitude)"
+    }
+}
+
+extension CLLocationCoordinate2D: Equatable {
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension GeocodeUseCase: TestDependencyKey {
+    public static var testValue = GeocodeUseCase()
+}
+
+extension DependencyValues {
+    public var geocodeUseCase: GeocodeUseCase {
+        get { self[GeocodeUseCase.self] }
+        set { self[GeocodeUseCase.self] = newValue }
+    }
 }
