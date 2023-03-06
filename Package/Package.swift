@@ -11,8 +11,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Presentation",
-            targets: ["Presentation"]),
+            name: "Search",
+            targets: ["Search"]),
         .library(
             name: "Clip",
             targets: ["Clip"]),
@@ -25,7 +25,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Presentation",
+            name: "Search",
             dependencies: [
                 "Domain",
                 "Company",
