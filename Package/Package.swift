@@ -42,6 +42,12 @@ let package = Package(
             dependencies: [
                 "Domain",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Domain",
