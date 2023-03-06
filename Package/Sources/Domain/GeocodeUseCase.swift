@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  GeocodeUseCase.swift
 //  
 //
 //  Created by AkkeyLab on 2023/03/06.
