@@ -11,17 +11,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Presentation",
-            targets: ["Presentation"]),
-        .library(
-            name: "Domain",
-            targets: ["Domain"]),
-        .library(
-            name: "Data",
-            targets: ["Data"]),
-        .library(
-            name: "Extension",
-            targets: ["Extension"]),
+            name: "Search",
+            targets: ["Search"]),
         .library(
             name: "Clip",
             targets: ["Clip"]),
@@ -34,7 +25,20 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Presentation",
+            name: "Search",
+            dependencies: [
+                "Domain",
+                "Company",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+            ]),
+        .target(
+            name: "Company",
             dependencies: [
                 "Domain",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
@@ -61,6 +65,7 @@ let package = Package(
             name: "Clip",
             dependencies: [
                 "Domain",
+                "Company",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .testTarget(

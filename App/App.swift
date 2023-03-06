@@ -5,7 +5,7 @@
 //  Created by AkkeyLab on 2023/01/08.
 //
 
-import Presentation
+import Search
 import SwiftUI
 
 @main

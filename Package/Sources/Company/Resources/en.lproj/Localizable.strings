@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  
+
+  Created by AkkeyLab on 2023/01/22.
+  
+*/
+
+// MARK: Common
+"common.ok" = "OK";

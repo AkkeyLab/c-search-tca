@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F405094F297C501A00C25459 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4050951297C501A00C25459 /* Localizable.strings */; };
-		F4A283A7296AF47E0040608F /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = F4A283A6296AF47E0040608F /* Presentation */; };
+		F46CEF1529B6538F0096B6E1 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = F46CEF1429B6538F0096B6E1 /* Search */; };
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4A283A7296AF47E0040608F /* Presentation in Frameworks */,
+				F46CEF1529B6538F0096B6E1 /* Search in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,7 +169,7 @@
 			);
 			name = "c-search";
 			packageProductDependencies = (
-				F4A283A6296AF47E0040608F /* Presentation */,
+				F46CEF1429B6538F0096B6E1 /* Search */,
 			);
 			productName = "c-search";
 			productReference = F4C37D30296AEE2100D0084B /* c-search.app */;
@@ -620,9 +620,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F4A283A6296AF47E0040608F /* Presentation */ = {
+		F46CEF1429B6538F0096B6E1 /* Search */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Presentation;
+			productName = Search;
 		};
 		F4FDC8032998EEA90057D80A /* Clip */ = {
 			isa = XCSwiftPackageProductDependency;

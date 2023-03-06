@@ -51,3 +51,18 @@ public struct Company {
 
 extension Company: Identifiable {}
 extension Company: Hashable {}
+
+public extension Company {
+    static var mock: Company {
+        Company(
+            id: .zero,
+            corporateNumber: "",
+            name: "",
+            prefectureName: "",
+            cityName: "",
+            streetNumber: "",
+            postCode: "",
+            furigana: nil
+        )
+    }
+}
