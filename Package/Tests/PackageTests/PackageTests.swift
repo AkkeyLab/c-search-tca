@@ -1,6 +1,6 @@
 import APIKit
 import ComposableArchitecture
-import CoreLocation
+import MapKit
 import XCTest
 @testable import Data
 @testable import Domain
@@ -49,14 +49,6 @@ final class PackageTests: XCTestCase {
     // Action <-- Effect <-- Reducer
     @MainActor
     func testFailureSearchCompaniesReducer() async {
-        enum TestError: String, Error, LocalizedError {
-            case test
-
-            var errorDescription: String? {
-                rawValue
-            }
-        }
-
         struct FailureGatewayMock: SearchCompaniesGatewayProtocol {
             func search(name: String) async throws -> CompaniesEntity {
                 throw TestError.test
@@ -78,6 +70,101 @@ final class PackageTests: XCTestCase {
 
         await store.send(.confirmedError) {
             $0.companies = []
+            $0.error = nil
+        }
+    }
+
+    // Test the following ranges
+    // Action -------------> Reducer --> State
+    // Action <-- Effect <-- Reducer
+    @MainActor
+    func testSuccessCompanyReducer() async {
+        struct CLGeocoderMock: CLGeocoderProtocol {
+            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+        }
+
+        struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
+            func load<T: CompanyAddressEntity>() throws -> [T] {
+                [
+                    CompanyAddressEntityMock() as! T
+                ]
+            }
+
+            func append(address: String, latitude: Double, longitude: Double) throws {
+                XCTFail()
+            }
+
+            func saveIfNeeded() throws {
+                XCTFail()
+            }
+        }
+
+        let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
+        let store = TestStore(
+            initialState: CompanyReducer.State(company: .mock),
+            reducer: CompanyReducer()
+                .dependency(\.geocodeUseCase, useCase)
+        )
+
+        await store.send(.geocode)
+
+        let coordinate = CLLocationCoordinate2D(
+            latitude: 35.652832,
+            longitude: 139.839478
+        )
+
+        await store.receive(.geocodeResponse(.success([coordinate]))) {
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            $0.regions = [
+                MKCoordinateRegion(center: coordinate, span: span)
+            ]
+        }
+    }
+
+    // Test the following ranges
+    // Action -------------> Reducer --> State
+    // Action <-- Effect <-- Reducer
+    @MainActor
+    func testFailureCompanyReducer() async {
+        struct CLGeocoderMock: CLGeocoderProtocol {
+            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                throw TestError.test
+            }
+        }
+
+        struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
+            func load<T: CompanyAddressEntity>() throws -> [T] {
+                []
+            }
+
+            func append(address: String, latitude: Double, longitude: Double) throws {
+                XCTFail()
+            }
+
+            func saveIfNeeded() throws {
+                XCTFail()
+            }
+        }
+
+        let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
+        let store = TestStore(
+            initialState: CompanyReducer.State(company: .mock),
+            reducer: CompanyReducer()
+                .dependency(\.geocodeUseCase, useCase)
+        )
+
+        await store.send(.geocode)
+
+        await store.receive(.geocodeResponse(.failure(TestError.test))) {
+            $0.regions = []
+            $0.error = LocalizedAlertError(error: TestError.test)
+        }
+
+        await store.send(.confirmedError) {
+            $0.regions = []
             $0.error = nil
         }
     }
@@ -163,23 +250,6 @@ final class PackageTests: XCTestCase {
     }
 
     func testCaching() async throws {
-        final class CompanyAddressEntityMock: CompanyAddressEntity {
-            override var address: String? {
-                set {}
-                get { PackageTests.addressMock }
-            }
-
-            override var latitude: Double {
-                set {}
-                get { 35.652832 }
-            }
-
-            override var longitude: Double {
-                set {}
-                get { 139.839478 }
-            }
-        }
-
         struct CLGeocoderMock: CLGeocoderProtocol {
             func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
                 [
@@ -210,23 +280,6 @@ final class PackageTests: XCTestCase {
     }
 
     func testCacheLoad() async throws {
-        final class CompanyAddressEntityMock: CompanyAddressEntity {
-            override var address: String? {
-                set {}
-                get { PackageTests.addressMock }
-            }
-
-            override var latitude: Double {
-                set {}
-                get { 35.652832 }
-            }
-
-            override var longitude: Double {
-                set {}
-                get { 139.839478 }
-            }
-        }
-
         struct CLGeocoderMock: CLGeocoderProtocol {
             func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
                 XCTFail()
@@ -255,5 +308,30 @@ final class PackageTests: XCTestCase {
         XCTAssertEqual(coordinate.count, 1)
         XCTAssertEqual(coordinate.first?.latitude, 35.652832)
         XCTAssertEqual(coordinate.first?.longitude, 139.839478)
+    }
+}
+
+private final class CompanyAddressEntityMock: CompanyAddressEntity {
+    override var address: String? {
+        set {}
+        get { PackageTests.addressMock }
+    }
+
+    override var latitude: Double {
+        set {}
+        get { 35.652832 }
+    }
+
+    override var longitude: Double {
+        set {}
+        get { 139.839478 }
+    }
+}
+
+private enum TestError: String, Error, LocalizedError {
+    case test
+
+    var errorDescription: String? {
+        rawValue
     }
 }
