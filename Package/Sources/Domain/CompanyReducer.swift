@@ -7,7 +7,6 @@
 
 import ComposableArchitecture
 import Data
-import Domain
 import MapKit
 
 public struct CompanyReducer: ReducerProtocol {
