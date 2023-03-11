@@ -9,7 +9,7 @@ import CoreLocation
 import Data
 
 public protocol CLGeocoderProtocol {
-    func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLPlacemark]
+    func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation]
 }
 
 public protocol GeocodeUseCaseProtocol {
@@ -31,8 +31,8 @@ public final class GeocodeUseCase: GeocodeUseCaseProtocol {
         guard cache.isEmpty else {
             return cache
         }
-        let placemarks = try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
-        let coordinate = placemarks.compactMap(\.location?.coordinate)
+        let placemarks: [CLLocation] = try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
+        let coordinate = placemarks.map(\.coordinate)
         try? createCache(address: address, coordinate: coordinate)
         return coordinate
     }
@@ -60,4 +60,9 @@ private extension Locale {
     static let jp = Locale(identifier: "ja_JP")
 }
 
-extension CLGeocoder: CLGeocoderProtocol {}
+extension CLGeocoder: CLGeocoderProtocol {
+    public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+        try await geocodeAddressString(addressString, in: region, preferredLocale: locale)
+            .compactMap(\.location)
+    }
+}

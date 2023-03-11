@@ -1,5 +1,6 @@
 import APIKit
 import ComposableArchitecture
+import CoreLocation
 import XCTest
 @testable import Data
 @testable import Domain
@@ -152,5 +153,107 @@ final class PackageTests: XCTestCase {
         XCTAssertNil(corporation.enAddressOutside)
         XCTAssertEqual(corporation.furigana, "アッキーラボ")
         XCTAssertEqual(corporation.hihyoji, "0")
+    }
+
+    static var addressMock: String {
+        let company = Company.mock
+        return company.prefectureName
+        + company.cityName
+        + company.streetNumber
+    }
+
+    func testCaching() async throws {
+        final class CompanyAddressEntityMock: CompanyAddressEntity {
+            override var address: String? {
+                set {}
+                get { PackageTests.addressMock }
+            }
+
+            override var latitude: Double {
+                set {}
+                get { 35.652832 }
+            }
+
+            override var longitude: Double {
+                set {}
+                get { 139.839478 }
+            }
+        }
+
+        struct CLGeocoderMock: CLGeocoderProtocol {
+            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                [
+                    CLLocation(latitude: 35.652832, longitude: 139.839478)
+                ]
+            }
+        }
+
+        struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
+            func load<T: CompanyAddressEntity>() throws -> [T] {
+                []
+            }
+
+            func append(address: String, latitude: Double, longitude: Double) throws {
+                XCTAssertEqual(address, PackageTests.addressMock)
+            }
+
+            func saveIfNeeded() throws {
+                XCTAssert(true)
+            }
+        }
+
+        let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
+        let coordinate = try await useCase.geocodeCompanyAddress(Company.mock)
+        XCTAssertEqual(coordinate.count, 1)
+        XCTAssertEqual(coordinate.first?.latitude, 35.652832)
+        XCTAssertEqual(coordinate.first?.longitude, 139.839478)
+    }
+
+    func testCacheLoad() async throws {
+        final class CompanyAddressEntityMock: CompanyAddressEntity {
+            override var address: String? {
+                set {}
+                get { PackageTests.addressMock }
+            }
+
+            override var latitude: Double {
+                set {}
+                get { 35.652832 }
+            }
+
+            override var longitude: Double {
+                set {}
+                get { 139.839478 }
+            }
+        }
+
+        struct CLGeocoderMock: CLGeocoderProtocol {
+            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+        }
+
+        struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
+            func load<T: CompanyAddressEntity>() throws -> [T] {
+                [
+                    CompanyAddressEntityMock() as! T
+                ]
+            }
+
+            func append(address: String, latitude: Double, longitude: Double) throws {
+                XCTFail()
+            }
+
+            func saveIfNeeded() throws {
+                XCTFail()
+            }
+        }
+
+        let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
+        let coordinate = try await useCase.geocodeCompanyAddress(Company.mock)
+        XCTAssertEqual(coordinate.count, 1)
+        XCTAssertEqual(coordinate.first?.latitude, 35.652832)
+        XCTAssertEqual(coordinate.first?.longitude, 139.839478)
     }
 }

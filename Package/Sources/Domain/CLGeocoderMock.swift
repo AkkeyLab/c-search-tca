@@ -10,7 +10,7 @@ import CoreLocation
 public struct CLGeocoderMock: CLGeocoderProtocol {
     public init() {}
 
-    public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLPlacemark] {
+    public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
         []
     }
 }
