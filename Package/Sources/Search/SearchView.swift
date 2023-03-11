@@ -29,7 +29,7 @@ public struct SearchView: View {
                 .navigationTitle(L10n.NavigationTitle.corporations)
                 .searchable(
                     text: $searchText,
-                    placement: .navigationBarDrawer(displayMode: .always),
+                    placement: searchablePlacement,
                     prompt: Text(L10n.Placeholder.enterCompanyName)
                 )
                 .onSubmit(of: .search) {
@@ -50,6 +50,14 @@ public struct SearchView: View {
                 viewStore.send(.confirmedError)
             }
         }
+    }
+
+    private var searchablePlacement: SearchFieldPlacement {
+        #if os(iOS)
+        return .navigationBarDrawer(displayMode: .always)
+        #elseif os(macOS)
+        return .automatic
+        #endif
     }
 }
 
