@@ -56,7 +56,7 @@ struct VisitLiveActivity: Widget {
     }
 }
 
-struct VisitLiveActivity_Previews: PreviewProvider {
+struct VisitLiveActivityPreviews: PreviewProvider {
     static let attributes = VisitAttributes(name: "Me")
     static let contentState = VisitAttributes.ContentState(value: 3)
 

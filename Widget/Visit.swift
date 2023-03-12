@@ -60,7 +60,7 @@ struct Visit: Widget {
     }
 }
 
-struct Visit_Previews: PreviewProvider {
+struct VisitPreviews: PreviewProvider {
     static var previews: some View {
         VisitEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
