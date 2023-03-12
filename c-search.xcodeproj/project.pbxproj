@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		F405094F297C501A00C25459 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4050951297C501A00C25459 /* Localizable.strings */; };
 		F46CEF1529B6538F0096B6E1 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = F46CEF1429B6538F0096B6E1 /* Search */; };
+		F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */; };
+		F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */; };
+		F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */; };
+		F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */; };
+		F46CEF4429BD9D600096B6E1 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4329BD9D600096B6E1 /* Visit.swift */; };
+		F46CEF4729BD9D610096B6E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46CEF4629BD9D610096B6E1 /* Assets.xcassets */; };
+		F46CEF4929BD9D610096B6E1 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */; };
+		F46CEF4A29BD9D610096B6E1 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */; };
+		F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
@@ -20,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F46CEF4B29BD9D610096B6E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F4C37D28296AEE2100D0084B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F46CEF3829BD9D600096B6E1;
+			remoteInfo = VisitExtension;
+		};
 		F4FDC7F92998D9A10057D80A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F4C37D28296AEE2100D0084B /* Project object */;
@@ -30,6 +46,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		F46CEF4E29BD9D610096B6E1 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4FDC7FB2998D9A10057D80A /* Embed App Clips */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,6 +73,15 @@
 /* Begin PBXFileReference section */
 		F4050950297C501A00C25459 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F4050952297C502E00C25459 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "c-search-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitBundle.swift; sourceTree = "<group>"; };
+		F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitLiveActivity.swift; sourceTree = "<group>"; };
+		F46CEF4329BD9D600096B6E1 /* Visit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
+		F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Visit.intentdefinition; sourceTree = "<group>"; };
+		F46CEF4629BD9D610096B6E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F46CEF4829BD9D610096B6E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A283A8296B47010040608F /* c-search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "c-search-Info.plist"; sourceTree = "<group>"; };
 		F4C37D30296AEE2100D0084B /* c-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "c-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C37D33296AEE2100D0084B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -62,6 +98,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F46CEF3629BD9D600096B6E1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */,
+				F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4C37D2D296AEE2100D0084B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,9 +126,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F46CEF3E29BD9D600096B6E1 /* Widget */ = {
+			isa = PBXGroup;
+			children = (
+				F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */,
+				F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */,
+				F46CEF4329BD9D600096B6E1 /* Visit.swift */,
+				F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */,
+				F46CEF4629BD9D610096B6E1 /* Assets.xcassets */,
+				F46CEF4829BD9D610096B6E1 /* Info.plist */,
+			);
+			path = Widget;
+			sourceTree = "<group>";
+		};
 		F4A283A5296AF47E0040608F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */,
+				F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -96,6 +156,7 @@
 				F4C37D44296AF1AB00D0084B /* Package */,
 				F4C37D32296AEE2100D0084B /* App */,
 				F4FDC7ED2998D9A00057D80A /* AppClip */,
+				F46CEF3E29BD9D600096B6E1 /* Widget */,
 				F4C37D31296AEE2100D0084B /* Products */,
 				F4A283A5296AF47E0040608F /* Frameworks */,
 			);
@@ -106,6 +167,7 @@
 			children = (
 				F4C37D30296AEE2100D0084B /* c-search.app */,
 				F4FDC7EC2998D9A00057D80A /* c-search-clip.app */,
+				F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +214,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		F46CEF3829BD9D600096B6E1 /* c-search-widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F46CEF5129BD9D610096B6E1 /* Build configuration list for PBXNativeTarget "c-search-widget" */;
+			buildPhases = (
+				F46CEF3529BD9D600096B6E1 /* Sources */,
+				F46CEF3629BD9D600096B6E1 /* Frameworks */,
+				F46CEF3729BD9D600096B6E1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "c-search-widget";
+			productName = VisitExtension;
+			productReference = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		F4C37D2F296AEE2100D0084B /* c-search */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4C37D3E296AEE2200D0084B /* Build configuration list for PBXNativeTarget "c-search" */;
@@ -161,11 +240,13 @@
 				F4FDC7E729979DDB0057D80A /* Setting Environment Variables */,
 				F4C37D2E296AEE2100D0084B /* Resources */,
 				F4FDC7FB2998D9A10057D80A /* Embed App Clips */,
+				F46CEF4E29BD9D610096B6E1 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				F4FDC7FA2998D9A10057D80A /* PBXTargetDependency */,
+				F46CEF4C29BD9D610096B6E1 /* PBXTargetDependency */,
 			);
 			name = "c-search";
 			packageProductDependencies = (
@@ -206,6 +287,9 @@
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					F46CEF3829BD9D600096B6E1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					F4C37D2F296AEE2100D0084B = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -230,11 +314,20 @@
 			targets = (
 				F4C37D2F296AEE2100D0084B /* c-search */,
 				F4FDC7EB2998D9A00057D80A /* c-search-clip */,
+				F46CEF3829BD9D600096B6E1 /* c-search-widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F46CEF3729BD9D600096B6E1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46CEF4729BD9D610096B6E1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4C37D2E296AEE2100D0084B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,10 +393,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F46CEF3529BD9D600096B6E1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */,
+				F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */,
+				F46CEF4929BD9D610096B6E1 /* Visit.intentdefinition in Sources */,
+				F46CEF4429BD9D600096B6E1 /* Visit.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4C37D2C296AEE2100D0084B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F46CEF4A29BD9D610096B6E1 /* Visit.intentdefinition in Sources */,
 				F4C37D34296AEE2100D0084B /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,6 +424,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F46CEF4C29BD9D610096B6E1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F46CEF3829BD9D600096B6E1 /* c-search-widget */;
+			targetProxy = F46CEF4B29BD9D610096B6E1 /* PBXContainerItemProxy */;
+		};
 		F4FDC7FA2998D9A10057D80A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -340,6 +450,60 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		F46CEF4F29BD9D610096B6E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y6Y8U7YGDU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Visit;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search.visit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F46CEF5029BD9D610096B6E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y6Y8U7YGDU;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Visit;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search.visit";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F4C37D3C296AEE2200D0084B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -599,6 +763,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F46CEF5129BD9D610096B6E1 /* Build configuration list for PBXNativeTarget "c-search-widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F46CEF4F29BD9D610096B6E1 /* Debug */,
+				F46CEF5029BD9D610096B6E1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F4C37D2B296AEE2100D0084B /* Build configuration list for PBXProject "c-search" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
