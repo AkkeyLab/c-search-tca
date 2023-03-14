@@ -9,6 +9,12 @@ import ComposableArchitecture
 import Data
 import MapKit
 
+public protocol UserDefaultsProtocol {
+    func set(_ value: Any?, forKey defaultName: String)
+}
+
+extension UserDefaults: UserDefaultsProtocol {}
+
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {
@@ -34,6 +40,7 @@ public struct CompanyReducer: ReducerProtocol {
     }
 
     @Dependency(\.geocodeUseCase) var geocodeUseCase
+    private let userDefaults: UserDefaultsProtocol
 
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -55,6 +62,7 @@ public struct CompanyReducer: ReducerProtocol {
                 state.error = LocalizedAlertError(error: error)
                 return .none
             case .registerToWidget:
+                userDefaults.set(state.company.name, forKey: "company-name-for-widget")
                 return .none
             case .confirmedError:
                 state.error = nil
@@ -63,7 +71,9 @@ public struct CompanyReducer: ReducerProtocol {
         }
     }
 
-    public init() {}
+    public init(userDefaults: UserDefaultsProtocol) {
+        self.userDefaults = userDefaults
+    }
 }
 
 extension MKCoordinateRegion: Identifiable {

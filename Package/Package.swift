@@ -17,6 +17,9 @@ let package = Package(
         .library(
             name: "Clip",
             targets: ["Clip"]),
+        .library(
+            name: "Extension",
+            targets: ["Extension"]),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.48.0"),

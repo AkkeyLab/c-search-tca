@@ -88,6 +88,7 @@
 		F4C37D37296AEE2200D0084B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PreviewAssets.xcassets; sourceTree = "<group>"; };
 		F4C37D44296AF1AB00D0084B /* Package */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Package; sourceTree = "<group>"; };
+		F4E5499529C0E55400F7C085 /* c-search-widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "c-search-widget.entitlements"; sourceTree = "<group>"; };
 		F4FDC7EC2998D9A00057D80A /* c-search-clip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "c-search-clip.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FDC7EE2998D9A00057D80A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		F4FDC7F22998D9A10057D80A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,6 +152,7 @@
 		F4C37D27296AEE2100D0084B = {
 			isa = PBXGroup;
 			children = (
+				F4E5499529C0E55400F7C085 /* c-search-widget.entitlements */,
 				F4FDC805299912E70057D80A /* c-search.entitlements */,
 				F4A283A8296B47010040608F /* c-search-Info.plist */,
 				F4C37D44296AF1AB00D0084B /* Package */,
@@ -455,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "c-search-widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y6Y8U7YGDU;
@@ -482,6 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "c-search-widget.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Y6Y8U7YGDU;

@@ -37,7 +37,7 @@ public struct ClipView: View {
                         CompanyView(
                             store: Store(
                                 initialState: CompanyReducer.State(company: company),
-                                reducer: CompanyReducer()
+                                reducer: CompanyReducer(userDefaults: UserDefaults.group)
                                     .dependency(\.geocodeUseCase, GeocodeUseCase())
                             )
                         )
