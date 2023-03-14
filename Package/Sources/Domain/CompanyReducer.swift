@@ -29,6 +29,7 @@ public struct CompanyReducer: ReducerProtocol {
     public enum Action: Equatable {
         case geocode
         case geocodeResponse(TaskResult<[CLLocationCoordinate2D]>)
+        case registerToWidget
         case confirmedError
     }
 
@@ -52,6 +53,8 @@ public struct CompanyReducer: ReducerProtocol {
                 return .none
             case let .geocodeResponse(.failure(error)):
                 state.error = LocalizedAlertError(error: error)
+                return .none
+            case .registerToWidget:
                 return .none
             case .confirmedError:
                 state.error = nil

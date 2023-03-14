@@ -8,3 +8,6 @@
 
 // MARK: Common
 "common.ok" = "OK";
+
+// MARK: Button
+"button.register_to_widget" = "Register to widget";
