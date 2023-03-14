@@ -56,7 +56,6 @@ private struct RectangleButtonStyle: ButtonStyle {
         configuration.label
             .multilineTextAlignment(.center)
             .foregroundColor(configuration.isPressed ? .secondary : .primary)
-            .cornerRadius(8)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .overlay {
