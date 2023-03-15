@@ -105,7 +105,7 @@ final class PackageTests: XCTestCase {
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
         let store = TestStore(
             initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer()
+            reducer: CompanyReducer(userDefaults: UserDefaultsMock())
                 .dependency(\.geocodeUseCase, useCase)
         )
 
@@ -152,7 +152,7 @@ final class PackageTests: XCTestCase {
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
         let store = TestStore(
             initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer()
+            reducer: CompanyReducer(userDefaults: UserDefaultsMock())
                 .dependency(\.geocodeUseCase, useCase)
         )
 
