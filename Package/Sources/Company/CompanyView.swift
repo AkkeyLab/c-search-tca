@@ -36,7 +36,8 @@ public struct CompanyView: View {
                         viewStore.send(.registerToWidget)
                     },
                     label: {
-                        Text(L10n.Button.registerToWidget)
+                        Label(L10n.Button.registerToWidget, systemImage: "pin")
+                            .font(.caption)
                     }
                 )
                 .buttonStyle(RectangleButtonStyle())
