@@ -8,4 +8,7 @@
 public struct UserDefaultsMock: UserDefaultsProtocol {
     public init() {}
     public func set(_ value: Any?, forKey defaultName: String) {}
+    public func string(forKey defaultName: String) -> String? {
+        nil
+    }
 }

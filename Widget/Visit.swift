@@ -5,28 +5,32 @@
 //  Created by AkkeyLab on 2023/03/12.
 //
 
-import WidgetKit
-import SwiftUI
+import Extension
 import Intents
+import SwiftUI
+import WidgetKit
 
 struct Provider: IntentTimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+    let userDefaults: UserDefaults
+
+    func placeholder(in context: Context) -> CompanyEntry {
+        CompanyEntry(date: Date(), configuration: ConfigurationIntent(), name: "")
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (CompanyEntry) -> ()) {
+        let entry = CompanyEntry(date: Date(), configuration: configuration, name: "Apple, inc.")
         completion(entry)
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
+        var entries: [CompanyEntry] = []
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let companyName = userDefaults.string(forKey: "company-name-for-widget") ?? "Unregistered"
+            let entry = CompanyEntry(date: entryDate, configuration: configuration, name: companyName)
             entries.append(entry)
         }
 
@@ -35,16 +39,20 @@ struct Provider: IntentTimelineProvider {
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct CompanyEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let name: String
 }
 
 struct VisitEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack(spacing: 8) {
+            Image(systemName: "building.2.crop.circle")
+            Text(entry.name)
+        }
     }
 }
 
@@ -52,17 +60,17 @@ struct Visit: Widget {
     let kind: String = "Visit"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(userDefaults: .group)) { entry in
             VisitEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Company Name")
+        .description("Show your favorite company name")
     }
 }
 
 struct VisitPreviews: PreviewProvider {
     static var previews: some View {
-        VisitEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        VisitEntryView(entry: CompanyEntry(date: Date(), configuration: ConfigurationIntent(), name: "Apple, inc."))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

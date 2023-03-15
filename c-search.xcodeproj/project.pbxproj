@@ -21,6 +21,7 @@
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
+		F4D6DDA729C24C2E00CF9C79 /* Extension in Frameworks */ = {isa = PBXBuildFile; productRef = F4D6DDA629C24C2E00CF9C79 /* Extension */; };
 		F4FDC7EF2998D9A00057D80A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDC7EE2998D9A00057D80A /* App.swift */; };
 		F4FDC7F32998D9A10057D80A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F22998D9A10057D80A /* Assets.xcassets */; };
 		F4FDC7F62998D9A10057D80A /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F52998D9A10057D80A /* PreviewAssets.xcassets */; };
@@ -105,6 +106,7 @@
 			files = (
 				F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */,
 				F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */,
+				F4D6DDA729C24C2E00CF9C79 /* Extension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +231,9 @@
 			dependencies = (
 			);
 			name = "c-search-widget";
+			packageProductDependencies = (
+				F4D6DDA629C24C2E00CF9C79 /* Extension */,
+			);
 			productName = VisitExtension;
 			productReference = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -809,6 +814,10 @@
 		F46CEF1429B6538F0096B6E1 /* Search */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Search;
+		};
+		F4D6DDA629C24C2E00CF9C79 /* Extension */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Extension;
 		};
 		F4FDC8032998EEA90057D80A /* Clip */ = {
 			isa = XCSwiftPackageProductDependency;
