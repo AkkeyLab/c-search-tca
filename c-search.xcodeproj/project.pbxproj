@@ -15,9 +15,10 @@
 		F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */; };
 		F46CEF4429BD9D600096B6E1 /* Visit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4329BD9D600096B6E1 /* Visit.swift */; };
 		F46CEF4729BD9D610096B6E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46CEF4629BD9D610096B6E1 /* Assets.xcassets */; };
-		F46CEF4929BD9D610096B6E1 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */; };
-		F46CEF4A29BD9D610096B6E1 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */; };
 		F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F496ED6329C554BD009A8B47 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F496ED6629C554BD009A8B47 /* Visit.intentdefinition */; };
+		F496ED6429C554BD009A8B47 /* Visit.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = F496ED6629C554BD009A8B47 /* Visit.intentdefinition */; };
+		F496ED6C29C55792009A8B47 /* Widget in Frameworks */ = {isa = PBXBuildFile; productRef = F496ED6B29C55792009A8B47 /* Widget */; };
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
@@ -80,9 +81,11 @@
 		F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitBundle.swift; sourceTree = "<group>"; };
 		F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitLiveActivity.swift; sourceTree = "<group>"; };
 		F46CEF4329BD9D600096B6E1 /* Visit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visit.swift; sourceTree = "<group>"; };
-		F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Visit.intentdefinition; sourceTree = "<group>"; };
 		F46CEF4629BD9D610096B6E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F46CEF4829BD9D610096B6E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F496ED6529C554BD009A8B47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; name = Base; path = Base.lproj/Visit.intentdefinition; sourceTree = "<group>"; };
+		F496ED6829C554C8009A8B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Visit.strings; sourceTree = "<group>"; };
+		F496ED6A29C554C8009A8B47 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Visit.strings; sourceTree = "<group>"; };
 		F4A283A8296B47010040608F /* c-search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "c-search-Info.plist"; sourceTree = "<group>"; };
 		F4C37D30296AEE2100D0084B /* c-search.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "c-search.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4C37D33296AEE2100D0084B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -106,6 +109,7 @@
 			files = (
 				F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */,
 				F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */,
+				F496ED6C29C55792009A8B47 /* Widget in Frameworks */,
 				F4D6DDA729C24C2E00CF9C79 /* Extension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +139,7 @@
 				F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */,
 				F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */,
 				F46CEF4329BD9D600096B6E1 /* Visit.swift */,
-				F46CEF4529BD9D600096B6E1 /* Visit.intentdefinition */,
+				F496ED6629C554BD009A8B47 /* Visit.intentdefinition */,
 				F46CEF4629BD9D610096B6E1 /* Assets.xcassets */,
 				F46CEF4829BD9D610096B6E1 /* Info.plist */,
 			);
@@ -233,6 +237,7 @@
 			name = "c-search-widget";
 			packageProductDependencies = (
 				F4D6DDA629C24C2E00CF9C79 /* Extension */,
+				F496ED6B29C55792009A8B47 /* Widget */,
 			);
 			productName = VisitExtension;
 			productReference = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */;
@@ -406,7 +411,7 @@
 			files = (
 				F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */,
 				F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */,
-				F46CEF4929BD9D610096B6E1 /* Visit.intentdefinition in Sources */,
+				F496ED6429C554BD009A8B47 /* Visit.intentdefinition in Sources */,
 				F46CEF4429BD9D600096B6E1 /* Visit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,7 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46CEF4A29BD9D610096B6E1 /* Visit.intentdefinition in Sources */,
+				F496ED6329C554BD009A8B47 /* Visit.intentdefinition in Sources */,
 				F4C37D34296AEE2100D0084B /* App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,6 +457,16 @@
 				F4050952297C502E00C25459 /* ja */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F496ED6629C554BD009A8B47 /* Visit.intentdefinition */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F496ED6529C554BD009A8B47 /* Base */,
+				F496ED6829C554C8009A8B47 /* en */,
+				F496ED6A29C554C8009A8B47 /* ja */,
+			);
+			name = Visit.intentdefinition;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -814,6 +829,10 @@
 		F46CEF1429B6538F0096B6E1 /* Search */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Search;
+		};
+		F496ED6B29C55792009A8B47 /* Widget */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Widget;
 		};
 		F4D6DDA629C24C2E00CF9C79 /* Extension */ = {
 			isa = XCSwiftPackageProductDependency;

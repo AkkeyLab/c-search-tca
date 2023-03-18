@@ -18,6 +18,9 @@ let package = Package(
             name: "Clip",
             targets: ["Clip"]),
         .library(
+            name: "Widget",
+            targets: ["Widget"]),
+        .library(
             name: "Extension",
             targets: ["Extension"]),
     ],
@@ -72,6 +75,9 @@ let package = Package(
                 "Company",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
+        .target(
+            name: "Widget",
+            dependencies: []),
         .testTarget(
             name: "PackageTests",
             dependencies: [

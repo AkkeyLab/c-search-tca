@@ -8,6 +8,7 @@
 import Extension
 import Intents
 import SwiftUI
+import Widget
 import WidgetKit
 
 struct Provider: IntentTimelineProvider {
@@ -45,23 +46,12 @@ struct CompanyEntry: TimelineEntry {
     let name: String
 }
 
-struct VisitEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "building.2.crop.circle")
-            Text(entry.name)
-        }
-    }
-}
-
 struct Visit: Widget {
     let kind: String = "Visit"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(userDefaults: .group)) { entry in
-            VisitEntryView(entry: entry)
+            VisitView(entry: entry)
         }
         .configurationDisplayName("Company Name")
         .description("Show your favorite company name")
@@ -70,7 +60,12 @@ struct Visit: Widget {
 
 struct VisitPreviews: PreviewProvider {
     static var previews: some View {
-        VisitEntryView(entry: CompanyEntry(date: Date(), configuration: ConfigurationIntent(), name: "Apple, inc."))
+        VisitView(entry: CompanyEntry(date: Date(), configuration: ConfigurationIntent(), name: "Apple, inc."))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+
+        VisitView(entry: CompanyEntry(date: Date(), configuration: ConfigurationIntent(), name: "Apple, inc."))
+            .previewContext(WidgetPreviewContext(family: .accessoryRectangular))
     }
 }
+
+extension CompanyEntry: VisitEntryProtocol {}
