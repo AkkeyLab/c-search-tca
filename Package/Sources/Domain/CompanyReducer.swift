@@ -86,8 +86,8 @@ public struct CompanyReducer: ReducerProtocol {
                     return .none
                 }
                 guard let activity = state.activity else {
-                    let attributes = VisitAttributes(name: "Me")
-                    let contentState = VisitAttributes.ContentState(value: 3)
+                    let attributes = VisitAttributes(companyName: state.company.name)
+                    let contentState = VisitAttributes.ContentState()
                     let staleDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
                     let content = ActivityContent(state: contentState, staleDate: staleDate)
                     do {

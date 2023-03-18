@@ -29,8 +29,8 @@ struct VisitPreviews: PreviewProvider {
 
 @available(iOS 16.2, *)
 struct VisitLiveActivityPreviews: PreviewProvider {
-    static let attributes = VisitAttributes(name: "Me")
-    static let contentState = VisitAttributes.ContentState(value: 3)
+    static let attributes = VisitAttributes(companyName: "AkkeyLab, inc.")
+    static let contentState = VisitAttributes.ContentState()
 
     @available(iOS 16.2, *)
     static var previews: some View {

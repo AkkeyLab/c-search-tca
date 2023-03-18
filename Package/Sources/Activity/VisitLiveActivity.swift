@@ -11,19 +11,13 @@ import SwiftUI
 
 public struct VisitAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var value: Int
-
-        public init(value: Int) {
-            self.value = value
-        }
+        public init() {}
     }
 
-    // Fixed non-changing properties about your activity go here!
-    var name: String
+    var companyName: String
 
-    public init(name: String) {
-        self.name = name
+    public init(companyName: String) {
+        self.companyName = companyName
     }
 }
 
@@ -31,37 +25,54 @@ public struct VisitAttributes: ActivityAttributes {
 public struct VisitLiveActivity: Widget {
     public var body: some WidgetConfiguration {
         ActivityConfiguration(for: VisitAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello")
-            }
-            .activityBackgroundTint(Color.cyan)
+            mainContent(context: context)
+            .activityBackgroundTint(.black)
             .activitySystemActionForegroundColor(Color.black)
 
         } dynamicIsland: { context in
             DynamicIsland {
-                // Expanded UI goes here.  Compose the expanded UI through
-                // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
-                }
-                DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    brandLabel
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom")
-                    // more content
+                    VStack {
+                        Spacer()
+                        mainContent(context: context)
+                        Spacer()
+                    }
                 }
             } compactLeading: {
-                Text("L")
+                brandLabel
             } compactTrailing: {
-                Text("T")
+                statusView
             } minimal: {
-                Text("Min")
+                statusView
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
+            .widgetURL(URL(string: "http://akkeylab.com"))
             .keylineTint(Color.red)
         }
+    }
+
+    private func mainContent(context: ActivityViewContext<VisitAttributes>) -> some View {
+        VStack {
+            Label("The person in charge will come. Please wait for a little while", systemImage: "phone.connection")
+                .font(.caption)
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+            Text(context.attributes.companyName)
+                .font(.body)
+                .foregroundColor(.white)
+                .padding(.horizontal, 16)
+        }
+    }
+
+    private var brandLabel: some View {
+        Label("c-search", systemImage: "building.2.crop.circle")
+    }
+
+    private var statusView: some View {
+        Image(systemName: "phone.connection")
+            .padding()
     }
 
     public init() {}
