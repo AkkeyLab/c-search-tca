@@ -41,6 +41,16 @@ public struct CompanyView: View {
                     }
                 )
                 .buttonStyle(RectangleButtonStyle())
+                Button(
+                    action: {
+                        viewStore.send(.callToCompany)
+                    },
+                    label: {
+                        Label(L10n.Button.arrivalAtTheEntrance, systemImage: "phone.arrow.up.right")
+                            .font(.caption)
+                    }
+                )
+                .buttonStyle(RectangleButtonStyle())
             }
             .onAppear {
                 viewStore.send(.geocode)
@@ -54,16 +64,21 @@ public struct CompanyView: View {
 
 private struct RectangleButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .multilineTextAlignment(.center)
-            .foregroundColor(configuration.isPressed ? .secondary : .primary)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 8)
-            .overlay {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.primary, lineWidth: 1)
-            }
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+        HStack {
+            Spacer()
+            configuration.label
+                .multilineTextAlignment(.center)
+                .foregroundColor(configuration.isPressed ? .secondary : .primary)
+                .padding(.vertical, 8)
+
+            Spacer()
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.primary, lineWidth: 1)
+        }
+        .scaleEffect(configuration.isPressed ? 0.98 : 1)
+        .padding(.horizontal, 16)
     }
 }
 

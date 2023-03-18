@@ -44,6 +44,7 @@ public struct CompanyReducer: ReducerProtocol {
         case geocode
         case geocodeResponse(TaskResult<[CLLocationCoordinate2D]>)
         case registerToWidget
+        case callToCompany
         case confirmedError
     }
 
@@ -74,6 +75,8 @@ public struct CompanyReducer: ReducerProtocol {
                 let companyName = state.company.name.applyingTransform(.fullwidthToHalfwidth, reverse: false)
                 userDefaults.set(companyName, forKey: "company-name-for-widget")
                 widgetCenter.reloadAllTimelines()
+                return .none
+            case .callToCompany:
                 return .none
             case .confirmedError:
                 state.error = nil
