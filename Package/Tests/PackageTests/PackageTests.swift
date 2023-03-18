@@ -102,10 +102,27 @@ final class PackageTests: XCTestCase {
             }
         }
 
+        struct TestableUserDefaultsMock: UserDefaultsProtocol {
+            func set(_ value: Any?, forKey defaultName: String) {
+                XCTAssert(true)
+            }
+
+            func string(forKey defaultName: String) -> String? {
+                XCTFail()
+                return nil
+            }
+        }
+
+        struct TestableWidgetCenterMock: WidgetCenterProtocol {
+            func reloadAllTimelines() {
+                XCTAssert(true)
+            }
+        }
+
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
         let store = TestStore(
             initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
+            reducer: CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
         )
 
@@ -122,6 +139,8 @@ final class PackageTests: XCTestCase {
                 MKCoordinateRegion(center: coordinate, span: span)
             ]
         }
+
+        await store.send(.registerToWidget)
     }
 
     // Test the following ranges
