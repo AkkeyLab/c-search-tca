@@ -31,7 +31,7 @@ public struct VisitView: View {
         HStack(spacing: 8) {
             Image(systemName: "building.2.crop.circle")
             Text(entry.name ?? "Unregistered")
-                .font(.title)
+                .font(.body)
                 .redacted(reason: entry.name == nil ? .placeholder : [])
         }
     }
