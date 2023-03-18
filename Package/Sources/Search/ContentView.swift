@@ -9,6 +9,7 @@ import ComposableArchitecture
 import Domain
 import SwiftUI
 
+@available(iOS 16.1, *)
 public struct ContentView: View {
     @Binding private var searchText: String
 

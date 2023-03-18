@@ -11,6 +11,7 @@ import Domain
 import SwiftUI
 import WidgetKit
 
+@available(iOS 16.1, *)
 public struct ClipView: View {
     private let store: StoreOf<SearchCompaniesReducer>
     private let companyName: String
@@ -48,7 +49,9 @@ public struct ClipView: View {
     }
 }
 
+@available(iOS 16.1, *)
 struct ContentViewPreviews: PreviewProvider {
+    @available(iOS 16.1, *)
     static var previews: some View {
         ClipView(
             store: Store(

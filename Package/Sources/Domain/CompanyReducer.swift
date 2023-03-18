@@ -5,6 +5,8 @@
 //  Created by AkkeyLab on 2023/02/21.
 //
 
+import Activity
+import ActivityKit
 import ComposableArchitecture
 import Data
 import MapKit
@@ -23,6 +25,7 @@ extension UserDefaults: UserDefaultsProtocol {}
 
 extension WidgetCenter: WidgetCenterProtocol {}
 
+@available(iOS 16.1, *)
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {
@@ -34,6 +37,8 @@ public struct CompanyReducer: ReducerProtocol {
         public let company: Company
         public var regions = [MKCoordinateRegion]()
         public var error: LocalizedAlertError?
+
+        fileprivate var activity: Activity<VisitAttributes>?
 
         public init(company: Company) {
             self.company = company
@@ -77,6 +82,17 @@ public struct CompanyReducer: ReducerProtocol {
                 widgetCenter.reloadAllTimelines()
                 return .none
             case .callToCompany:
+                if #available(iOS 16.2, *) {
+                    let attributes = VisitAttributes(name: "Me")
+                    let contentState = VisitAttributes.ContentState(value: 3)
+                    let staleDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
+                    let content = ActivityContent(state: contentState, staleDate: staleDate)
+                    do {
+                        state.activity = try Activity<VisitAttributes>.request(attributes: attributes, content: content)
+                    } catch {
+                        state.error = LocalizedAlertError(error: error)
+                    }
+                }
                 return .none
             case .confirmedError:
                 state.error = nil

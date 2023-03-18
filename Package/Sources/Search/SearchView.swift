@@ -11,6 +11,7 @@ import Domain
 import SwiftUI
 import WidgetKit
 
+@available(iOS 16.1, *)
 public struct SearchView: View {
     private let store: StoreOf<SearchCompaniesReducer>
     @State private var selectedCompany: Company?
@@ -62,7 +63,9 @@ public struct SearchView: View {
     }
 }
 
+@available(iOS 16.1, *)
 private struct SearchViewwPreviews: PreviewProvider {
+    @available(iOS 16.1, *)
     static var previews: some View {
         SearchView(
             store: Store(
