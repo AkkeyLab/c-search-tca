@@ -82,7 +82,10 @@ public struct CompanyReducer: ReducerProtocol {
                 widgetCenter.reloadAllTimelines()
                 return .none
             case .callToCompany:
-                if #available(iOS 16.2, *) {
+                guard #available(iOS 16.2, *) else {
+                    return .none
+                }
+                guard let activity = state.activity else {
                     let attributes = VisitAttributes(name: "Me")
                     let contentState = VisitAttributes.ContentState(value: 3)
                     let staleDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
@@ -92,8 +95,11 @@ public struct CompanyReducer: ReducerProtocol {
                     } catch {
                         state.error = LocalizedAlertError(error: error)
                     }
+                    return .none
                 }
-                return .none
+                return .fireAndForget {
+                    await activity.end()
+                }
             case .confirmedError:
                 state.error = nil
                 return .none
