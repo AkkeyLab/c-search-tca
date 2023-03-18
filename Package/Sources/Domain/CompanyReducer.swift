@@ -71,7 +71,8 @@ public struct CompanyReducer: ReducerProtocol {
                 state.error = LocalizedAlertError(error: error)
                 return .none
             case .registerToWidget:
-                userDefaults.set(state.company.name, forKey: "company-name-for-widget")
+                let companyName = state.company.name.applyingTransform(.fullwidthToHalfwidth, reverse: false)
+                userDefaults.set(companyName, forKey: "company-name-for-widget")
                 widgetCenter.reloadAllTimelines()
                 return .none
             case .confirmedError:
