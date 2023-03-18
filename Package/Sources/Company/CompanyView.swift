@@ -72,7 +72,7 @@ struct CompanyViewPreviews: PreviewProvider {
         CompanyView(
             store: Store(
                 initialState: CompanyReducer.State(company: Company.mock),
-                reducer: CompanyReducer(userDefaults: UserDefaultsMock())
+                reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                     .dependency(\.geocodeUseCase, GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock()))
             )
         )

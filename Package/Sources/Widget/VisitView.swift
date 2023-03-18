@@ -5,30 +5,40 @@
 //  Created by AkkeyLab on 2023/03/18.
 //
 
+import Extension
 import SwiftUI
+import WidgetKit
 
-public protocol VisitEntryProtocol {
-    var date: Date { get }
-    var name: String { get }
+public struct Visit: Widget {
+    let kind: String = "Visit"
+
+    public var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider(userDefaults: .group)) { entry in
+            VisitView(entry: entry)
+        }
+        .configurationDisplayName("Company Name")
+        .description("Show your favorite company name")
+        .supportedFamilies([.systemMedium, .accessoryInline])
+    }
+
+    public init() {}
 }
 
 public struct VisitView: View {
-    let entry: VisitEntryProtocol
+    let entry: CompanyEntry
 
     public var body: some View {
-        VStack(spacing: 8) {
+        HStack(spacing: 8) {
             Image(systemName: "building.2.crop.circle")
-            Text(entry.name)
+            Text(entry.name ?? "Unregistered")
+                .font(.title)
+                .redacted(reason: entry.name == nil ? .placeholder : [])
         }
-    }
-
-    public init(entry: VisitEntryProtocol) {
-        self.entry = entry
     }
 }
 
-struct VisitViewPreviews: PreviewProvider {
-    static var previews: some View {
-        VisitView(entry: VisitEntryMock())
+public extension VisitView {
+    static var mock: Self {
+        VisitView(entry: CompanyEntry(date: Date(), name: "AkkeyLab, inc."))
     }
 }

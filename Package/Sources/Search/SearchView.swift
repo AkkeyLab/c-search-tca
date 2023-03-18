@@ -9,6 +9,7 @@ import Company
 import ComposableArchitecture
 import Domain
 import SwiftUI
+import WidgetKit
 
 public struct SearchView: View {
     private let store: StoreOf<SearchCompaniesReducer>
@@ -40,7 +41,7 @@ public struct SearchView: View {
                     CompanyView(
                         store: Store(
                             initialState: CompanyReducer.State(company: company),
-                            reducer: CompanyReducer(userDefaults: UserDefaults.group)
+                            reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
                         )
                     )

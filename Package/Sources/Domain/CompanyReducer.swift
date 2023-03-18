@@ -8,13 +8,20 @@
 import ComposableArchitecture
 import Data
 import MapKit
+import WidgetKit
 
 public protocol UserDefaultsProtocol {
     func set(_ value: Any?, forKey defaultName: String)
     func string(forKey defaultName: String) -> String?
 }
 
+public protocol WidgetCenterProtocol {
+    func reloadAllTimelines()
+}
+
 extension UserDefaults: UserDefaultsProtocol {}
+
+extension WidgetCenter: WidgetCenterProtocol {}
 
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
@@ -42,6 +49,7 @@ public struct CompanyReducer: ReducerProtocol {
 
     @Dependency(\.geocodeUseCase) var geocodeUseCase
     private let userDefaults: UserDefaultsProtocol
+    private let widgetCenter: WidgetCenterProtocol
 
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -64,6 +72,7 @@ public struct CompanyReducer: ReducerProtocol {
                 return .none
             case .registerToWidget:
                 userDefaults.set(state.company.name, forKey: "company-name-for-widget")
+                widgetCenter.reloadAllTimelines()
                 return .none
             case .confirmedError:
                 state.error = nil
@@ -72,8 +81,9 @@ public struct CompanyReducer: ReducerProtocol {
         }
     }
 
-    public init(userDefaults: UserDefaultsProtocol) {
+    public init(userDefaults: UserDefaultsProtocol, widgetCenter: WidgetCenterProtocol) {
         self.userDefaults = userDefaults
+        self.widgetCenter = widgetCenter
     }
 }
 
