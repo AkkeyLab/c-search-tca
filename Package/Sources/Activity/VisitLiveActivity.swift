@@ -9,18 +9,27 @@ import ActivityKit
 import WidgetKit
 import SwiftUI
 
-struct VisitAttributes: ActivityAttributes {
+public struct VisitAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
         // Dynamic stateful properties about your activity go here!
         var value: Int
+
+        public init(value: Int) {
+            self.value = value
+        }
     }
 
     // Fixed non-changing properties about your activity go here!
     var name: String
+
+    public init(name: String) {
+        self.name = name
+    }
 }
 
-struct VisitLiveActivity: Widget {
-    var body: some WidgetConfiguration {
+@available(iOS 16.1, *)
+public struct VisitLiveActivity: Widget {
+    public var body: some WidgetConfiguration {
         ActivityConfiguration(for: VisitAttributes.self) { context in
             // Lock screen/banner UI goes here
             VStack {
@@ -54,24 +63,6 @@ struct VisitLiveActivity: Widget {
             .keylineTint(Color.red)
         }
     }
-}
 
-struct VisitLiveActivityPreviews: PreviewProvider {
-    static let attributes = VisitAttributes(name: "Me")
-    static let contentState = VisitAttributes.ContentState(value: 3)
-
-    static var previews: some View {
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-            .previewDisplayName("Island Compact")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-            .previewDisplayName("Island Expanded")
-        attributes
-            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-            .previewDisplayName("Minimal")
-        attributes
-            .previewContext(contentState, viewKind: .content)
-            .previewDisplayName("Notification")
-    }
+    public init() {}
 }

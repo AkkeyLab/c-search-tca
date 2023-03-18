@@ -12,10 +12,10 @@
 		F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */; };
 		F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */; };
 		F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */; };
-		F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */; };
 		F46CEF4729BD9D610096B6E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46CEF4629BD9D610096B6E1 /* Assets.xcassets */; };
 		F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F496ED6C29C55792009A8B47 /* Widget in Frameworks */ = {isa = PBXBuildFile; productRef = F496ED6B29C55792009A8B47 /* Widget */; };
+		F496ED6E29C5C99B009A8B47 /* Activity in Frameworks */ = {isa = PBXBuildFile; productRef = F496ED6D29C5C99B009A8B47 /* Activity */; };
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
 		F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D37296AEE2200D0084B /* Assets.xcassets */; };
 		F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4C37D3A296AEE2200D0084B /* PreviewAssets.xcassets */; };
@@ -75,7 +75,6 @@
 		F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitBundle.swift; sourceTree = "<group>"; };
-		F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitLiveActivity.swift; sourceTree = "<group>"; };
 		F46CEF4629BD9D610096B6E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F46CEF4829BD9D610096B6E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4A283A8296B47010040608F /* c-search-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "c-search-Info.plist"; sourceTree = "<group>"; };
@@ -100,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */,
+				F496ED6E29C5C99B009A8B47 /* Activity in Frameworks */,
 				F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */,
 				F496ED6C29C55792009A8B47 /* Widget in Frameworks */,
 			);
@@ -128,7 +128,6 @@
 			isa = PBXGroup;
 			children = (
 				F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */,
-				F46CEF4129BD9D600096B6E1 /* VisitLiveActivity.swift */,
 				F46CEF4629BD9D610096B6E1 /* Assets.xcassets */,
 				F46CEF4829BD9D610096B6E1 /* Info.plist */,
 			);
@@ -226,6 +225,7 @@
 			name = "c-search-widget";
 			packageProductDependencies = (
 				F496ED6B29C55792009A8B47 /* Widget */,
+				F496ED6D29C5C99B009A8B47 /* Activity */,
 			);
 			productName = VisitExtension;
 			productReference = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */;
@@ -397,7 +397,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F46CEF4229BD9D600096B6E1 /* VisitLiveActivity.swift in Sources */,
 				F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -633,6 +632,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "c-search-Info.plist";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -670,6 +670,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "c-search-Info.plist";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -808,6 +809,10 @@
 		F496ED6B29C55792009A8B47 /* Widget */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Widget;
+		};
+		F496ED6D29C5C99B009A8B47 /* Activity */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Activity;
 		};
 		F4FDC8032998EEA90057D80A /* Clip */ = {
 			isa = XCSwiftPackageProductDependency;
