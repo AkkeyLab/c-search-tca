@@ -77,7 +77,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
-    @available(iOS 16.1, *)
+    @available(iOS 16.2, *)
     @MainActor
     func testSuccessCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
@@ -125,6 +125,7 @@ final class PackageTests: XCTestCase {
             initialState: CompanyReducer.State(company: .mock),
             reducer: CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
+                .dependency(\.activityUseCase, ActivityUseCase())
         )
 
         await store.send(.geocode)
@@ -147,7 +148,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
-    @available(iOS 16.1, *)
+    @available(iOS 16.2, *)
     @MainActor
     func testFailureCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
@@ -175,6 +176,7 @@ final class PackageTests: XCTestCase {
             initialState: CompanyReducer.State(company: .mock),
             reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
+                .dependency(\.activityUseCase, ActivityUseCase())
         )
 
         await store.send(.geocode)

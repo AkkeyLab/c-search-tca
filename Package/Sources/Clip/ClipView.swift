@@ -11,7 +11,7 @@ import Domain
 import SwiftUI
 import WidgetKit
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 public struct ClipView: View {
     private let store: StoreOf<SearchCompaniesReducer>
     private let companyName: String
@@ -41,6 +41,7 @@ public struct ClipView: View {
                                 initialState: CompanyReducer.State(company: company),
                                 reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                     .dependency(\.geocodeUseCase, GeocodeUseCase())
+                                    .dependency(\.activityUseCase, ActivityUseCase())
                             )
                         )
                     }
@@ -49,9 +50,9 @@ public struct ClipView: View {
     }
 }
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 struct ContentViewPreviews: PreviewProvider {
-    @available(iOS 16.1, *)
+    @available(iOS 16.2, *)
     static var previews: some View {
         ClipView(
             store: Store(

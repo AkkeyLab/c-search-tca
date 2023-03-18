@@ -21,7 +21,7 @@ public struct VisitAttributes: ActivityAttributes {
     }
 }
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 public struct VisitLiveActivity: Widget {
     public var body: some WidgetConfiguration {
         ActivityConfiguration(for: VisitAttributes.self) { context in

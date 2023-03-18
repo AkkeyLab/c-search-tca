@@ -25,7 +25,7 @@ extension UserDefaults: UserDefaultsProtocol {}
 
 extension WidgetCenter: WidgetCenterProtocol {}
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {
@@ -53,6 +53,7 @@ public struct CompanyReducer: ReducerProtocol {
         case confirmedError
     }
 
+    @Dependency(\.activityUseCase) var activityUseCase
     @Dependency(\.geocodeUseCase) var geocodeUseCase
     private let userDefaults: UserDefaultsProtocol
     private let widgetCenter: WidgetCenterProtocol
@@ -82,23 +83,16 @@ public struct CompanyReducer: ReducerProtocol {
                 widgetCenter.reloadAllTimelines()
                 return .none
             case .callToCompany:
-                guard #available(iOS 16.2, *) else {
-                    return .none
-                }
                 guard let activity = state.activity else {
-                    let attributes = VisitAttributes(companyName: state.company.name)
-                    let contentState = VisitAttributes.ContentState()
-                    let staleDate = Calendar.current.date(byAdding: .minute, value: 1, to: Date())!
-                    let content = ActivityContent(state: contentState, staleDate: staleDate)
                     do {
-                        state.activity = try Activity<VisitAttributes>.request(attributes: attributes, content: content)
+                        state.activity = try activityUseCase.request(companyName: state.company.name)
                     } catch {
                         state.error = LocalizedAlertError(error: error)
                     }
                     return .none
                 }
                 return .fireAndForget {
-                    await activity.end()
+                    await activityUseCase.end(activity: activity)
                 }
             case .confirmedError:
                 state.error = nil
@@ -141,9 +135,20 @@ extension GeocodeUseCase: TestDependencyKey {
     public static var testValue = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
 }
 
+@available(iOS 16.2, *)
+extension ActivityUseCase: TestDependencyKey {
+    public static var testValue = ActivityUseCase()
+}
+
 extension DependencyValues {
     public var geocodeUseCase: GeocodeUseCase {
         get { self[GeocodeUseCase.self] }
         set { self[GeocodeUseCase.self] = newValue }
+    }
+
+    @available(iOS 16.2, *)
+    public var activityUseCase: ActivityUseCase {
+        get { self[ActivityUseCase.self] }
+        set { self[ActivityUseCase.self] = newValue }
     }
 }

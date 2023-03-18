@@ -11,7 +11,7 @@ import Domain
 import SwiftUI
 import WidgetKit
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 public struct SearchView: View {
     private let store: StoreOf<SearchCompaniesReducer>
     @State private var selectedCompany: Company?
@@ -44,6 +44,7 @@ public struct SearchView: View {
                             initialState: CompanyReducer.State(company: company),
                             reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
+                                .dependency(\.activityUseCase, ActivityUseCase())
                         )
                     )
                 }
@@ -63,9 +64,9 @@ public struct SearchView: View {
     }
 }
 
-@available(iOS 16.1, *)
+@available(iOS 16.2, *)
 private struct SearchViewwPreviews: PreviewProvider {
-    @available(iOS 16.1, *)
+    @available(iOS 16.2, *)
     static var previews: some View {
         SearchView(
             store: Store(
