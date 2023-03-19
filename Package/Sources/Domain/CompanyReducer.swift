@@ -8,7 +8,23 @@
 import ComposableArchitecture
 import Data
 import MapKit
+import WidgetKit
+import XCTestDynamicOverlay
 
+public protocol UserDefaultsProtocol {
+    func set(_ value: Any?, forKey defaultName: String)
+    func string(forKey defaultName: String) -> String?
+}
+
+public protocol WidgetCenterProtocol {
+    func reloadAllTimelines()
+}
+
+extension UserDefaults: UserDefaultsProtocol {}
+
+extension WidgetCenter: WidgetCenterProtocol {}
+
+@available(iOS 16.1, *)
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {
@@ -29,10 +45,16 @@ public struct CompanyReducer: ReducerProtocol {
     public enum Action: Equatable {
         case geocode
         case geocodeResponse(TaskResult<[CLLocationCoordinate2D]>)
+        case registerToWidget
+        case callToCompany
+        case cancelCallToCompany
         case confirmedError
     }
 
+    @Dependency(\.activityClient) var activityClient
     @Dependency(\.geocodeUseCase) var geocodeUseCase
+    private let userDefaults: UserDefaultsProtocol
+    private let widgetCenter: WidgetCenterProtocol
 
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -53,6 +75,21 @@ public struct CompanyReducer: ReducerProtocol {
             case let .geocodeResponse(.failure(error)):
                 state.error = LocalizedAlertError(error: error)
                 return .none
+            case .registerToWidget:
+                let companyName = state.company.name.applyingTransform(.fullwidthToHalfwidth, reverse: false)
+                userDefaults.set(companyName, forKey: "company-name-for-widget")
+                widgetCenter.reloadAllTimelines()
+                return .none
+            case .callToCompany:
+                let companyName = state.company.name
+                return .fireAndForget {
+                    try await activityClient.request(companyName)
+                }
+            case .cancelCallToCompany:
+                let companyName = state.company.name
+                return .fireAndForget {
+                    await activityClient.end(companyName)
+                }
             case .confirmedError:
                 state.error = nil
                 return .none
@@ -60,7 +97,10 @@ public struct CompanyReducer: ReducerProtocol {
         }
     }
 
-    public init() {}
+    public init(userDefaults: UserDefaultsProtocol, widgetCenter: WidgetCenterProtocol) {
+        self.userDefaults = userDefaults
+        self.widgetCenter = widgetCenter
+    }
 }
 
 extension MKCoordinateRegion: Identifiable {
@@ -96,4 +136,42 @@ extension DependencyValues {
         get { self[GeocodeUseCase.self] }
         set { self[GeocodeUseCase.self] = newValue }
     }
+
+    @available(iOS 16.1, *)
+    var activityClient: ActivityClient {
+        get { self[ActivityClient.self] }
+        set { self[ActivityClient.self] = newValue }
+    }
+}
+
+@available(iOS 16.1, *)
+struct ActivityClient {
+    var request: @Sendable (_ companyName: String) async throws -> Void
+    var update: @Sendable (_ companyName: String) async -> Void
+    var end: @Sendable (_ companyName: String) async -> Void
+}
+
+@available(iOS 16.1, *)
+extension ActivityClient: DependencyKey {
+    @available(iOS 16.1, *)
+    static let liveValue = Self(
+        request: { try await ActivityActor.shared.request(companyName: $0) },
+        update: { await ActivityActor.shared.update(companyName: $0) },
+        end: { await ActivityActor.shared.end(companyName: $0) }
+    )
+}
+
+@available(iOS 16.1, *)
+extension ActivityClient: TestDependencyKey {
+    static let testValue = Self(
+        request: unimplemented("\(Self.self).request"),
+        update: unimplemented("\(Self.self).update"),
+        end: unimplemented("\(Self.self).end")
+    )
+
+    static let previewValue = Self(
+        request: { _ in },
+        update: { _ in },
+        end: { _ in }
+    )
 }

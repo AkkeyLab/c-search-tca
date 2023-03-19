@@ -77,6 +77,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
+    @available(iOS 16.1, *)
     @MainActor
     func testSuccessCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
@@ -102,10 +103,27 @@ final class PackageTests: XCTestCase {
             }
         }
 
+        struct TestableUserDefaultsMock: UserDefaultsProtocol {
+            func set(_ value: Any?, forKey defaultName: String) {
+                XCTAssert(true)
+            }
+
+            func string(forKey defaultName: String) -> String? {
+                XCTFail()
+                return nil
+            }
+        }
+
+        struct TestableWidgetCenterMock: WidgetCenterProtocol {
+            func reloadAllTimelines() {
+                XCTAssert(true)
+            }
+        }
+
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
         let store = TestStore(
             initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer()
+            reducer: CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
         )
 
@@ -122,11 +140,14 @@ final class PackageTests: XCTestCase {
                 MKCoordinateRegion(center: coordinate, span: span)
             ]
         }
+
+        await store.send(.registerToWidget)
     }
 
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
+    @available(iOS 16.1, *)
     @MainActor
     func testFailureCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
@@ -152,7 +173,7 @@ final class PackageTests: XCTestCase {
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
         let store = TestStore(
             initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer()
+            reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
         )
 

@@ -8,3 +8,7 @@
 
 // MARK: Common
 "common.ok" = "OK";
+
+// MARK: Button
+"button.register_to_widget" = "ウィジェットに登録";
+"button.arrival_at_the_entrance" = "エントランスに到着";

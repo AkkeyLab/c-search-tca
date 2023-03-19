@@ -37,10 +37,11 @@ extension KeyedDecodingContainer {
     }
 
     private func date(template: DateTemplate, forKey: KeyedDecodingContainer.Key, dateString: String) throws -> Date {
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .jp
         let formatter = DateFormatter().apply {
             $0.calendar = calendar
-            $0.locale = .jp
+            $0.timeZone = .jp
             $0.dateFormat = DateFormatter.dateFormat(
                 fromTemplate: template.rawValue,
                 options: .zero,

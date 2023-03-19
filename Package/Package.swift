@@ -17,6 +17,12 @@ let package = Package(
         .library(
             name: "Clip",
             targets: ["Clip"]),
+        .library(
+            name: "Widget",
+            targets: ["Widget"]),
+        .library(
+            name: "Activity",
+            targets: ["Activity"]),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.48.0"),
@@ -54,6 +60,7 @@ let package = Package(
             name: "Domain",
             dependencies: [
                 "Data",
+                "Activity",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]),
         .target(
@@ -68,6 +75,26 @@ let package = Package(
                 "Domain",
                 "Company",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]),
+        .target(
+            name: "Widget",
+            dependencies: [
+                "Extension",
+            ],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+            ]),
+        .target(
+            name: "Activity",
+            dependencies: [],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .testTarget(
             name: "PackageTests",
