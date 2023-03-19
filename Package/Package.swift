@@ -80,6 +80,12 @@ let package = Package(
             name: "Widget",
             dependencies: [
                 "Extension",
+            ],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Activity",

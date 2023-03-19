@@ -16,8 +16,8 @@ public struct Visit: Widget {
         StaticConfiguration(kind: kind, provider: Provider(userDefaults: .group)) { entry in
             VisitView(entry: entry)
         }
-        .configurationDisplayName("Company Name")
-        .description("Show your favorite company name")
+        .configurationDisplayName(L10n.Widget.title)
+        .description(L10n.Widget.description)
         .supportedFamilies([.systemMedium, .accessoryInline])
     }
 
@@ -30,7 +30,7 @@ public struct VisitView: View {
     public var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "building.2.crop.circle")
-            Text(entry.name ?? "Unregistered")
+            Text(entry.name ?? L10n.Widget.unregisteredCompanyName)
                 .font(.body)
                 .redacted(reason: entry.name == nil ? .placeholder : [])
         }
@@ -39,6 +39,6 @@ public struct VisitView: View {
 
 public extension VisitView {
     static var mock: Self {
-        VisitView(entry: CompanyEntry(date: Date(), name: "AkkeyLab, inc."))
+        VisitView(entry: CompanyEntry(date: Date(), name: L10n.Widget.snapshot))
     }
 }

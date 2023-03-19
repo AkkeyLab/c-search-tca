@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  
+
+  Created by AkkeyLab on 2023/01/22.
+  
+*/
+
+// MARK: Widget
+"widget.unregistered_company_name" = "Unregistered";
+"widget.title" = "Company Name";
+"widget.description" = "Show your favorite company name";
+"widget.snapshot" = "AkkeyLab, inc.";
