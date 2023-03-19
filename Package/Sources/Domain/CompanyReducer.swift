@@ -11,6 +11,7 @@ import ComposableArchitecture
 import Data
 import MapKit
 import WidgetKit
+import XCTestDynamicOverlay
 
 public protocol UserDefaultsProtocol {
     func set(_ value: Any?, forKey defaultName: String)
@@ -38,8 +39,6 @@ public struct CompanyReducer: ReducerProtocol {
         public var regions = [MKCoordinateRegion]()
         public var error: LocalizedAlertError?
 
-        fileprivate var activity: Activity<VisitAttributes>?
-
         public init(company: Company) {
             self.company = company
         }
@@ -50,10 +49,11 @@ public struct CompanyReducer: ReducerProtocol {
         case geocodeResponse(TaskResult<[CLLocationCoordinate2D]>)
         case registerToWidget
         case callToCompany
+        case cancelCallToCompany
         case confirmedError
     }
 
-    @Dependency(\.activityUseCase) var activityUseCase
+    @Dependency(\.activityClient) var activityClient
     @Dependency(\.geocodeUseCase) var geocodeUseCase
     private let userDefaults: UserDefaultsProtocol
     private let widgetCenter: WidgetCenterProtocol
@@ -83,16 +83,14 @@ public struct CompanyReducer: ReducerProtocol {
                 widgetCenter.reloadAllTimelines()
                 return .none
             case .callToCompany:
-                guard let activity = state.activity else {
-                    do {
-                        state.activity = try activityUseCase.request(companyName: state.company.name)
-                    } catch {
-                        state.error = LocalizedAlertError(error: error)
-                    }
-                    return .none
-                }
+                let companyName = state.company.name
                 return .fireAndForget {
-                    await activityUseCase.end(activity: activity)
+                    try await activityClient.request(companyName)
+                }
+            case .cancelCallToCompany:
+                let companyName = state.company.name
+                return .fireAndForget {
+                    await activityClient.end(companyName)
                 }
             case .confirmedError:
                 state.error = nil
@@ -135,20 +133,47 @@ extension GeocodeUseCase: TestDependencyKey {
     public static var testValue = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
 }
 
-@available(iOS 16.2, *)
-extension ActivityUseCase: TestDependencyKey {
-    public static var testValue = ActivityUseCase()
-}
-
 extension DependencyValues {
     public var geocodeUseCase: GeocodeUseCase {
         get { self[GeocodeUseCase.self] }
         set { self[GeocodeUseCase.self] = newValue }
     }
 
-    @available(iOS 16.2, *)
-    public var activityUseCase: ActivityUseCase {
-        get { self[ActivityUseCase.self] }
-        set { self[ActivityUseCase.self] = newValue }
+    @available(iOS 16.1, *)
+    var activityClient: ActivityClient {
+        get { self[ActivityClient.self] }
+        set { self[ActivityClient.self] = newValue }
     }
+}
+
+@available(iOS 16.1, *)
+struct ActivityClient {
+    var request: @Sendable (_ companyName: String) async throws -> Void
+    var update: @Sendable (_ companyName: String) async -> Void
+    var end: @Sendable (_ companyName: String) async -> Void
+}
+
+@available(iOS 16.1, *)
+extension ActivityClient: DependencyKey {
+    @available(iOS 16.1, *)
+    static let liveValue = Self(
+        request: { try await ActivityActor.shared.request(companyName: $0) },
+        update: { await ActivityActor.shared.update(companyName: $0) },
+        end: { await ActivityActor.shared.end(companyName: $0) }
+    )
+}
+
+@available(iOS 16.1, *)
+extension ActivityClient: TestDependencyKey {
+    static let testValue = Self(
+        request: unimplemented("\(Self.self).request"),
+        update: unimplemented("\(Self.self).update"),
+        end: unimplemented("\(Self.self).end")
+    )
+
+    static let previewValue = Self(
+        request: { _ in },
+        update: { _ in },
+        end: { _ in }
+    )
 }

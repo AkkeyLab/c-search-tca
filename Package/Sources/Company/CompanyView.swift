@@ -56,6 +56,9 @@ public struct CompanyView: View {
             .onAppear {
                 viewStore.send(.geocode)
             }
+            .onDisappear {
+                viewStore.send(.cancelCallToCompany)
+            }
             .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
@@ -92,7 +95,6 @@ struct CompanyViewPreviews: PreviewProvider {
                 initialState: CompanyReducer.State(company: Company.mock),
                 reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                     .dependency(\.geocodeUseCase, GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock()))
-                    .dependency(\.activityUseCase, ActivityUseCase())
             )
         )
     }

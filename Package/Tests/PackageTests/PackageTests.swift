@@ -125,7 +125,6 @@ final class PackageTests: XCTestCase {
             initialState: CompanyReducer.State(company: .mock),
             reducer: CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
-                .dependency(\.activityUseCase, ActivityUseCase())
         )
 
         await store.send(.geocode)
@@ -176,7 +175,6 @@ final class PackageTests: XCTestCase {
             initialState: CompanyReducer.State(company: .mock),
             reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
-                .dependency(\.activityUseCase, ActivityUseCase())
         )
 
         await store.send(.geocode)

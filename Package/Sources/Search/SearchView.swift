@@ -44,7 +44,6 @@ public struct SearchView: View {
                             initialState: CompanyReducer.State(company: company),
                             reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
-                                .dependency(\.activityUseCase, ActivityUseCase())
                         )
                     )
                 }
