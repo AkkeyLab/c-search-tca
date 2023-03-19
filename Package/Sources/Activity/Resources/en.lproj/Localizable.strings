@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  
+
+  Created by AkkeyLab on 2023/01/22.
+  
+*/
+
+// MARK: Activity
+"activity.app_name" = "c-search";
+"activity.please_wait" = "The person in charge will come. Please wait for a little while";

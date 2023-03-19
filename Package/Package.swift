@@ -83,7 +83,13 @@ let package = Package(
             ]),
         .target(
             name: "Activity",
-            dependencies: []),
+            dependencies: [],
+            resources: [
+                .process("Resources"),
+            ],
+            plugins: [
+                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
+            ]),
         .testTarget(
             name: "PackageTests",
             dependencies: [
