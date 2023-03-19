@@ -77,7 +77,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
-    @available(iOS 16.2, *)
+    @available(iOS 16.1, *)
     @MainActor
     func testSuccessCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
@@ -147,7 +147,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // Action -------------> Reducer --> State
     // Action <-- Effect <-- Reducer
-    @available(iOS 16.2, *)
+    @available(iOS 16.1, *)
     @MainActor
     func testFailureCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {

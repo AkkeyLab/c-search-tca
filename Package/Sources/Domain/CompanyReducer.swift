@@ -5,8 +5,6 @@
 //  Created by AkkeyLab on 2023/02/21.
 //
 
-import Activity
-import ActivityKit
 import ComposableArchitecture
 import Data
 import MapKit
@@ -26,7 +24,7 @@ extension UserDefaults: UserDefaultsProtocol {}
 
 extension WidgetCenter: WidgetCenterProtocol {}
 
-@available(iOS 16.2, *)
+@available(iOS 16.1, *)
 public struct CompanyReducer: ReducerProtocol {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {

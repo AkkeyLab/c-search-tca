@@ -6,8 +6,8 @@
 //
 
 import ActivityKit
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 public struct VisitAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
@@ -21,7 +21,7 @@ public struct VisitAttributes: ActivityAttributes {
     }
 }
 
-@available(iOS 16.2, *)
+@available(iOS 16.1, *)
 public struct VisitLiveActivity: Widget {
     public var body: some WidgetConfiguration {
         ActivityConfiguration(for: VisitAttributes.self) { context in

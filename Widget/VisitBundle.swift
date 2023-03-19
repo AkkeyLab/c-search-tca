@@ -6,9 +6,9 @@
 //
 
 import Activity
+import SwiftUI
 import Widget
 import WidgetKit
-import SwiftUI
 
 @main
 struct VisitBundle: WidgetBundle {
@@ -27,12 +27,12 @@ struct VisitPreviews: PreviewProvider {
     }
 }
 
-@available(iOS 16.2, *)
+@available(iOS 16.1, *)
 struct VisitLiveActivityPreviews: PreviewProvider {
     static let attributes = VisitAttributes(companyName: "AkkeyLab, inc.")
     static let contentState = VisitAttributes.ContentState()
 
-    @available(iOS 16.2, *)
+    @available(iOS 16.1, *)
     static var previews: some View {
         attributes
             .previewContext(contentState, viewKind: .dynamicIsland(.compact))

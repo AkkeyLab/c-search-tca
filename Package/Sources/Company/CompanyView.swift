@@ -11,7 +11,7 @@ import Domain
 import MapKit
 import SwiftUI
 
-@available(iOS 16.2, *)
+@available(iOS 16.1, *)
 public struct CompanyView: View {
     private let store: StoreOf<CompanyReducer>
 
@@ -86,9 +86,9 @@ private struct RectangleButtonStyle: ButtonStyle {
     }
 }
 
-@available(iOS 16.2, *)
+@available(iOS 16.1, *)
 struct CompanyViewPreviews: PreviewProvider {
-    @available(iOS 16.2, *)
+    @available(iOS 16.1, *)
     static var previews: some View {
         CompanyView(
             store: Store(
