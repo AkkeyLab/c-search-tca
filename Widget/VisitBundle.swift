@@ -5,7 +5,9 @@
 //  Created by AkkeyLab on 2023/03/12.
 //
 
+#if canImport(ActivityKit)
 import Activity
+#endif
 import SwiftUI
 import Widget
 import WidgetKit
@@ -14,7 +16,9 @@ import WidgetKit
 struct VisitBundle: WidgetBundle {
     var body: some Widget {
         Visit()
+        #if canImport(ActivityKit)
         VisitLiveActivity()
+        #endif
     }
 }
 
@@ -27,6 +31,7 @@ struct VisitPreviews: PreviewProvider {
     }
 }
 
+#if canImport(ActivityKit)
 @available(iOS 16.1, *)
 struct VisitLiveActivityPreviews: PreviewProvider {
     static let attributes = VisitAttributes(companyName: "AkkeyLab, inc.")
@@ -48,3 +53,4 @@ struct VisitLiveActivityPreviews: PreviewProvider {
             .previewDisplayName("Notification")
     }
 }
+#endif

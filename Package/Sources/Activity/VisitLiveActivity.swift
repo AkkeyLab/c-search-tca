@@ -5,6 +5,7 @@
 //  Created by AkkeyLab on 2023/03/12.
 //
 
+#if canImport(ActivityKit)
 import ActivityKit
 import SwiftUI
 import WidgetKit
@@ -77,3 +78,4 @@ public struct VisitLiveActivity: Widget {
 
     public init() {}
 }
+#endif
