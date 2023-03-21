@@ -5,6 +5,7 @@
 //  Created by AkkeyLab on 2023/03/19.
 //
 
+#if canImport(ActivityKit)
 import Activity
 import ActivityKit
 import Foundation
@@ -51,3 +52,4 @@ actor ActivityActor: GlobalActor {
         activities[companyName] = nil
     }
 }
+#endif

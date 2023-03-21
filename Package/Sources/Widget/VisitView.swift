@@ -18,10 +18,18 @@ public struct Visit: Widget {
         }
         .configurationDisplayName(L10n.Widget.title)
         .description(L10n.Widget.description)
-        .supportedFamilies([.systemMedium, .accessoryInline])
+        .supportedFamilies(families)
     }
 
     public init() {}
+
+    private var families: [WidgetFamily] {
+        #if os(macOS)
+        [.systemMedium]
+        #else
+        [.systemMedium, .accessoryInline]
+        #endif
+    }
 }
 
 public struct VisitView: View {

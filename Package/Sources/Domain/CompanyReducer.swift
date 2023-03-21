@@ -153,12 +153,16 @@ struct ActivityClient {
 
 @available(iOS 16.1, *)
 extension ActivityClient: DependencyKey {
+    #if canImport(ActivityKit)
     @available(iOS 16.1, *)
     static let liveValue = Self(
         request: { try await ActivityActor.shared.request(companyName: $0) },
         update: { await ActivityActor.shared.update(companyName: $0) },
         end: { await ActivityActor.shared.end(companyName: $0) }
     )
+    #else
+    static let liveValue = ActivityClient.previewValue
+    #endif
 }
 
 @available(iOS 16.1, *)

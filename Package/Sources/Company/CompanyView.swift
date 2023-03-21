@@ -42,6 +42,7 @@ public struct CompanyView: View {
                     }
                 )
                 .buttonStyle(RectangleButtonStyle())
+                #if canImport(ActivityKit)
                 Button(
                     action: {
                         viewStore.send(.callToCompany)
@@ -52,6 +53,7 @@ public struct CompanyView: View {
                     }
                 )
                 .buttonStyle(RectangleButtonStyle())
+                #endif
             }
             .onAppear {
                 viewStore.send(.geocode)
