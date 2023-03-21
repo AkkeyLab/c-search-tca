@@ -26,8 +26,10 @@ struct VisitPreviews: PreviewProvider {
     static var previews: some View {
         VisitView.mock
             .previewContext(WidgetPreviewContext(family: .systemMedium))
+        #if os(iOS)
         VisitView.mock
             .previewContext(WidgetPreviewContext(family: .accessoryInline))
+        #endif
     }
 }
 
