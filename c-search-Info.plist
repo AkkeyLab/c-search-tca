@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSEnvironment</key>
 	<dict>
 		<key>NATIONAL_TAX_AGENCY_API_KEY</key>
