@@ -16,7 +16,7 @@
 	<true/>
 	<key>com.apple.developer.associated-appclip-app-identifiers</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.app.appclipbundleid</string>
+		<string>$(AppIdentifierPrefix)com.akkeylab.c-search.company</string>
 	</array>
 </dict>
 </plist>
