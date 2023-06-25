@@ -28,7 +28,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.48.0"),
         .package(url: "https://github.com/ishkawa/APIKit", from: "5.4.0"),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.15.0"),
-        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.0"),
+        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
     ],
     targets: [
         .target(
