@@ -33,6 +33,8 @@ public struct CompanyView: View {
                         )
                     }
                 }
+                #if os(visionOS)
+                #else
                 Button(
                     action: {
                         viewStore.send(.registerToWidget)
@@ -43,6 +45,7 @@ public struct CompanyView: View {
                     }
                 )
                 .buttonStyle(RectangleButtonStyle())
+                #endif
                 #if canImport(ActivityKit)
                 Button(
                     action: {
