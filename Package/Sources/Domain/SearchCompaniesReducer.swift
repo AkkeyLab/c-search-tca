@@ -7,7 +7,7 @@
 
 import ComposableArchitecture
 
-public struct SearchCompaniesReducer: ReducerProtocol {
+public struct SearchCompaniesReducer: Reducer {
     public struct State: Equatable {
         public static func == (lhs: SearchCompaniesReducer.State, rhs: SearchCompaniesReducer.State) -> Bool {
             lhs.companies == rhs.companies
@@ -30,14 +30,15 @@ public struct SearchCompaniesReducer: ReducerProtocol {
 
     @Dependency(\.searchCompaniesUseCase) var searchCompaniesUseCase
 
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case let .search(companyName):
-                return .task {
-                    await .searchResponse(TaskResult {
+                return .run { send in
+                    let action: Action = await .searchResponse(TaskResult {
                         try await self.searchCompaniesUseCase.search(name: companyName)
                     })
+                    await send(action)
                 }
             case let .searchResponse(.success(companies)):
                 state.companies = companies
