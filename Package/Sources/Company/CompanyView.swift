@@ -22,7 +22,6 @@ public struct CompanyView: View {
     public var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
-                Text(viewStore.company.name)
                 ForEach(viewStore.regions) { region in
                     Map(position: .constant(.region(region))) {
                         MapContentBuilder.buildBlock(
