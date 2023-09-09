@@ -9,7 +9,11 @@ import Company
 import ComposableArchitecture
 import Domain
 import SwiftUI
+
+#if os(visionOS)
+#else
 import WidgetKit
+#endif
 
 @available(iOS 16.1, *)
 public struct SearchView: View {
@@ -41,7 +45,7 @@ public struct SearchView: View {
                 if let company = selectedCompany {
                     CompanyView(
                         store: Store(initialState: CompanyReducer.State(company: company)) {
-                            CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
+                            CompanyReducer(userDefaults: UserDefaults.group)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
                         }
                     )
@@ -58,6 +62,8 @@ public struct SearchView: View {
         return .navigationBarDrawer(displayMode: .always)
         #elseif os(macOS)
         return .automatic
+        #elseif os(visionOS)
+        return .navigationBarDrawer(displayMode: .always)
         #endif
     }
 }
@@ -73,5 +79,18 @@ private struct SearchViewwPreviews: PreviewProvider {
             },
             searchText: .constant("")
         )
+    }
+}
+
+extension CompanyReducer {
+    init(userDefaults: UserDefaultsProtocol) {
+        #if os(visionOS)
+        struct Dummy: WidgetCenterProtocol {
+            func reloadAllTimelines() {}
+        }
+        self.init(userDefaults: userDefaults, widgetCenter: Dummy())
+        #else
+        self.init(userDefaults: userDefaults, widgetCenter: WidgetCenter.shared)
+        #endif
     }
 }

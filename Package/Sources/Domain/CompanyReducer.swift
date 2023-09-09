@@ -8,8 +8,12 @@
 import ComposableArchitecture
 import Data
 import MapKit
-import WidgetKit
 import XCTestDynamicOverlay
+
+#if os(visionOS)
+#else
+import WidgetKit
+#endif
 
 public protocol UserDefaultsProtocol {
     func set(_ value: Any?, forKey defaultName: String)
@@ -22,7 +26,10 @@ public protocol WidgetCenterProtocol {
 
 extension UserDefaults: UserDefaultsProtocol {}
 
+#if os(visionOS)
+#else
 extension WidgetCenter: WidgetCenterProtocol {}
+#endif
 
 @available(iOS 16.1, *)
 public struct CompanyReducer: Reducer {

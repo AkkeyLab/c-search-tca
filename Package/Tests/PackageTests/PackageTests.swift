@@ -80,10 +80,17 @@ final class PackageTests: XCTestCase {
     @MainActor
     func testSuccessCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 XCTFail()
                 return []
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -149,9 +156,15 @@ final class PackageTests: XCTestCase {
     @MainActor
     func testFailureCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 throw TestError.test
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                throw TestError.test
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -269,11 +282,19 @@ final class PackageTests: XCTestCase {
 
     func testCaching() async throws {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 [
                     CLLocation(latitude: 35.652832, longitude: 139.839478)
                 ]
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                [
+                    CLLocation(latitude: 35.652832, longitude: 139.839478)
+                ]
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -299,10 +320,17 @@ final class PackageTests: XCTestCase {
 
     func testCacheLoad() async throws {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 XCTFail()
                 return []
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {

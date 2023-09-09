@@ -13,7 +13,7 @@
 		F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */; };
 		F46CEF4029BD9D600096B6E1 /* VisitBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F46CEF3F29BD9D600096B6E1 /* VisitBundle.swift */; };
 		F46CEF4729BD9D610096B6E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F46CEF4629BD9D610096B6E1 /* Assets.xcassets */; };
-		F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F46CEF4D29BD9D610096B6E1 /* c-search-widget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */; platformFilters = (ios, macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F496ED6C29C55792009A8B47 /* Widget in Frameworks */ = {isa = PBXBuildFile; productRef = F496ED6B29C55792009A8B47 /* Widget */; };
 		F496ED6E29C5C99B009A8B47 /* Activity in Frameworks */ = {isa = PBXBuildFile; productRef = F496ED6D29C5C99B009A8B47 /* Activity */; };
 		F4C37D34296AEE2100D0084B /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C37D33296AEE2100D0084B /* App.swift */; };
@@ -22,7 +22,7 @@
 		F4FDC7EF2998D9A00057D80A /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDC7EE2998D9A00057D80A /* App.swift */; };
 		F4FDC7F32998D9A10057D80A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F22998D9A10057D80A /* Assets.xcassets */; };
 		F4FDC7F62998D9A10057D80A /* PreviewAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4FDC7F52998D9A10057D80A /* PreviewAssets.xcassets */; };
-		F4FDC7FC2998D9A10057D80A /* c-search-clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = F4FDC7EC2998D9A00057D80A /* c-search-clip.app */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F4FDC7FC2998D9A10057D80A /* c-search-clip.app in Embed App Clips */ = {isa = PBXBuildFile; fileRef = F4FDC7EC2998D9A00057D80A /* c-search-clip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		F4FDC8042998EEA90057D80A /* Clip in Frameworks */ = {isa = PBXBuildFile; productRef = F4FDC8032998EEA90057D80A /* Clip */; };
 /* End PBXBuildFile section */
 
@@ -422,12 +422,15 @@
 /* Begin PBXTargetDependency section */
 		F46CEF4C29BD9D610096B6E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				macos,
+			);
 			target = F46CEF3829BD9D600096B6E1 /* c-search-widget */;
 			targetProxy = F46CEF4B29BD9D610096B6E1 /* PBXContainerItemProxy */;
 		};
 		F4FDC7FA2998D9A10057D80A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = F4FDC7EB2998D9A00057D80A /* c-search-clip */;
 			targetProxy = F4FDC7F92998D9A10057D80A /* PBXContainerItemProxy */;
 		};
@@ -656,12 +659,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -695,12 +699,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.akkeylab.c-search";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
