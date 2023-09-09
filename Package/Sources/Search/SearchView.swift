@@ -82,6 +82,7 @@ private struct SearchViewwPreviews: PreviewProvider {
     }
 }
 
+@available(iOS 16.1, *)
 extension CompanyReducer {
     init(userDefaults: UserDefaultsProtocol) {
         #if os(visionOS)

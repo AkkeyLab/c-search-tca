@@ -5,7 +5,6 @@
 //  Created by AkkeyLab on 2022/12/30.
 //
 
-import APIKit
 import Data
 import Foundation
 
@@ -14,15 +13,10 @@ public protocol SearchCompaniesGatewayProtocol {
 }
 
 public final class SearchCompaniesGateway: SearchCompaniesGatewayProtocol {
-    private let sessionAdapter: SessionAdapter
+    private let client: APIClient
 
-    public init(sessionAdapter: SessionAdapter) {
-        self.sessionAdapter = sessionAdapter
-    }
-
-    public init() {
-        let configuration = URLSessionConfiguration.default
-        sessionAdapter = URLSessionAdapter(configuration: configuration)
+    public init(session: Session = URLSession(configuration: .default)) {
+        client = APIClient(session: session)
     }
 
     public func search(name: String) async throws -> CompaniesEntity {
@@ -43,6 +37,6 @@ public final class SearchCompaniesGateway: SearchCompaniesGatewayProtocol {
             kind: .normal,
             hasClosed: false
         )
-        return try await Session(adapter: sessionAdapter).response(for: request)
+        return try await client.send(request: request)
     }
 }

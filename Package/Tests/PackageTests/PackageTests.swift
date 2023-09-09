@@ -1,4 +1,3 @@
-import APIKit
 import ComposableArchitecture
 import MapKit
 import XCTest
@@ -6,13 +5,11 @@ import XCTest
 @testable import Domain
 
 final class PackageTests: XCTestCase {
-    var adapter: TestSessionAdapter!
-    var session: Session!
+    var session: TestSession!
 
     override func setUp() {
         super.setUp()
-        adapter = TestSessionAdapter()
-        session = Session(adapter: adapter)
+        session = TestSession()
     }
 
     // Test the following ranges
@@ -225,7 +222,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // ApiRequest --> Gateway
     func testRecentlyEstablishedCompany() async throws {
-        adapter.data = try XCTUnwrap(CompaniesEntity.mockData)
+        session.data = try XCTUnwrap(CompaniesEntity.mockData)
 
         let request = CompaniesRequest(
             apiKey: "",
@@ -235,7 +232,7 @@ final class PackageTests: XCTestCase {
             kind: .normal,
             hasClosed: false
         )
-        let result = try await session.response(for: request)
+        let result = try await APIClient(session: session).send(request: request)
         XCTAssertEqual(result.lastUpdateDate.description, "2022-12-27 15:00:00 +0000")
         XCTAssertEqual(result.count, 1)
         XCTAssertEqual(result.divideNumber, 1)

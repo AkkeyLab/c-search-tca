@@ -26,7 +26,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.2.0"),
-        .package(url: "https://github.com/ishkawa/APIKit", from: "5.4.0"),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1"),
         .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
     ],
@@ -65,7 +64,7 @@ let package = Package(
             ]),
         .target(
             name: "Data",
-            dependencies: ["APIKit", "XMLCoder", "Extension"]),
+            dependencies: ["XMLCoder", "Extension"]),
         .target(
             name: "Extension",
             dependencies: []),
