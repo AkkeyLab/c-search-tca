@@ -24,13 +24,15 @@ public struct CompanyView: View {
             VStack {
                 Text(viewStore.company.name)
                 ForEach(viewStore.regions) { region in
-                    Map(
-                        coordinateRegion: .constant(region),
-                        annotationItems: [region],
-                        annotationContent: { location in
-                            MapMarker(coordinate: location.center)
-                        }
-                    )
+                    Map(position: .constant(.region(region))) {
+                        MapContentBuilder.buildBlock(
+                            Marker(
+                                viewStore.company.name,
+                                systemImage: "building.2.crop.circle.fill",
+                                coordinate: region.center
+                            )
+                        )
+                    }
                 }
                 Button(
                     action: {
@@ -55,6 +57,7 @@ public struct CompanyView: View {
                 .buttonStyle(RectangleButtonStyle())
                 #endif
             }
+            .safeAreaPadding(.bottom)
             .onAppear {
                 viewStore.send(.geocode)
             }
