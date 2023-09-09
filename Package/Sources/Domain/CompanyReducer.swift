@@ -25,7 +25,7 @@ extension UserDefaults: UserDefaultsProtocol {}
 extension WidgetCenter: WidgetCenterProtocol {}
 
 @available(iOS 16.1, *)
-public struct CompanyReducer: ReducerProtocol {
+public struct CompanyReducer: Reducer {
     public struct State: Equatable {
         public static func == (lhs: CompanyReducer.State, rhs: CompanyReducer.State) -> Bool {
             lhs.company == rhs.company
@@ -56,15 +56,16 @@ public struct CompanyReducer: ReducerProtocol {
     private let userDefaults: UserDefaultsProtocol
     private let widgetCenter: WidgetCenterProtocol
 
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .geocode:
                 let company = state.company
-                return .task {
-                    await .geocodeResponse(TaskResult {
+                return .run { send in
+                    let action: Action = await .geocodeResponse(TaskResult {
                         try await geocodeUseCase.geocodeCompanyAddress(company)
                     })
+                    await send(action)
                 }
             case let .geocodeResponse(.success(coordinate)):
                 let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
@@ -82,12 +83,13 @@ public struct CompanyReducer: ReducerProtocol {
                 return .none
             case .callToCompany:
                 let companyName = state.company.name
-                return .fireAndForget {
+                return .run { _ in
                     try await activityClient.request(companyName)
                 }
+
             case .cancelCallToCompany:
                 let companyName = state.company.name
-                return .fireAndForget {
+                return .run { _ in
                     await activityClient.end(companyName)
                 }
             case .confirmedError:

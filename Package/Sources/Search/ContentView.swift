@@ -19,11 +19,10 @@ public struct ContentView: View {
 
     public var body: some View {
         SearchView(
-            store: Store(
-                initialState: SearchCompaniesReducer.State(),
-                reducer: SearchCompaniesReducer()
+            store: Store(initialState: SearchCompaniesReducer.State()) {
+                SearchCompaniesReducer()
                     .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase())
-            ),
+            },
             searchText: $searchText
         )
     }

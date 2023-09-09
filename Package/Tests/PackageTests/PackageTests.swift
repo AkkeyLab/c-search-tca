@@ -20,11 +20,10 @@ final class PackageTests: XCTestCase {
     // Action <-- Effect <-- Reducer
     @MainActor
     func testSuccessSearchCompaniesReducer() async {
-        let store = TestStore(
-            initialState: SearchCompaniesReducer.State(),
-            reducer: SearchCompaniesReducer()
+        let store = TestStore(initialState: SearchCompaniesReducer.State()) {
+            SearchCompaniesReducer()
                 .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: SearchCompaniesGatewayMock()))
-        )
+        }
 
         await store.send(.search(companyName: ""))
 
@@ -55,11 +54,11 @@ final class PackageTests: XCTestCase {
             }
         }
 
-        let store = TestStore(
-            initialState: SearchCompaniesReducer.State(),
-            reducer: SearchCompaniesReducer()
+        let store = TestStore(initialState: SearchCompaniesReducer.State()) {
+            SearchCompaniesReducer()
                 .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: FailureGatewayMock()))
-        )
+        }
+
 
         await store.send(.search(companyName: ""))
 
@@ -121,11 +120,10 @@ final class PackageTests: XCTestCase {
         }
 
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
-        let store = TestStore(
-            initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
+        let store = TestStore(initialState: CompanyReducer.State(company: .mock)) {
+            CompanyReducer(userDefaults: TestableUserDefaultsMock(), widgetCenter: TestableWidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
-        )
+        }
 
         await store.send(.geocode)
 
@@ -171,11 +169,10 @@ final class PackageTests: XCTestCase {
         }
 
         let useCase = GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock())
-        let store = TestStore(
-            initialState: CompanyReducer.State(company: .mock),
-            reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
+        let store = TestStore(initialState: CompanyReducer.State(company: .mock)) {
+            CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                 .dependency(\.geocodeUseCase, useCase)
-        )
+        }
 
         await store.send(.geocode)
 

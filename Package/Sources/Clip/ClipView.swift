@@ -17,11 +17,10 @@ public struct ClipView: View {
     private let companyName: String
 
     public init(
-        store: StoreOf<SearchCompaniesReducer> = Store(
-            initialState: SearchCompaniesReducer.State(),
-            reducer: SearchCompaniesReducer()
+        store: StoreOf<SearchCompaniesReducer> = Store(initialState: SearchCompaniesReducer.State()) {
+            SearchCompaniesReducer()
                 .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase())
-        ),
+        },
         companyName: String
     ) {
         self.store = store
@@ -29,7 +28,7 @@ public struct ClipView: View {
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             Color(uiColor: .systemBackground)
                 .onAppear {
                     viewStore.send(.search(companyName: companyName))
@@ -37,11 +36,10 @@ public struct ClipView: View {
                 .overlay {
                     if let company = viewStore.companies.first {
                         CompanyView(
-                            store: Store(
-                                initialState: CompanyReducer.State(company: company),
-                                reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
+                            store: Store(initialState: CompanyReducer.State(company: company)) {
+                                CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                     .dependency(\.geocodeUseCase, GeocodeUseCase())
-                            )
+                            }
                         )
                     }
                 }
@@ -54,11 +52,10 @@ struct ContentViewPreviews: PreviewProvider {
     @available(iOS 16.1, *)
     static var previews: some View {
         ClipView(
-            store: Store(
-                initialState: SearchCompaniesReducer.State(),
-                reducer: SearchCompaniesReducer()
+            store: Store(initialState: SearchCompaniesReducer.State()) {
+                SearchCompaniesReducer()
                     .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: SearchCompaniesGatewayMock()))
-            ),
+            },
             companyName: ""
         )
     }

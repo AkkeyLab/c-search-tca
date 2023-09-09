@@ -23,7 +23,7 @@ public struct SearchView: View {
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             NavigationSplitView {
                 List(viewStore.companies, id: \.id, selection: $selectedCompany) { company in
                     NavigationLink(company.name, value: company)
@@ -40,11 +40,10 @@ public struct SearchView: View {
             } detail: {
                 if let company = selectedCompany {
                     CompanyView(
-                        store: Store(
-                            initialState: CompanyReducer.State(company: company),
-                            reducer: CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
+                        store: Store(initialState: CompanyReducer.State(company: company)) {
+                            CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
-                        )
+                        }
                     )
                 }
             }
@@ -68,11 +67,10 @@ private struct SearchViewwPreviews: PreviewProvider {
     @available(iOS 16.1, *)
     static var previews: some View {
         SearchView(
-            store: Store(
-                initialState: SearchCompaniesReducer.State(),
-                reducer: SearchCompaniesReducer()
+            store: Store(initialState: SearchCompaniesReducer.State()) {
+                SearchCompaniesReducer()
                     .dependency(\.searchCompaniesUseCase, SearchCompaniesUseCase(gateway: SearchCompaniesGatewayMock()))
-            ),
+            },
             searchText: .constant("")
         )
     }

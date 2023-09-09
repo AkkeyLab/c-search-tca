@@ -20,7 +20,7 @@ public struct CompanyView: View {
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
                 Text(viewStore.company.name)
                 ForEach(viewStore.regions) { region in
@@ -93,11 +93,10 @@ struct CompanyViewPreviews: PreviewProvider {
     @available(iOS 16.1, *)
     static var previews: some View {
         CompanyView(
-            store: Store(
-                initialState: CompanyReducer.State(company: Company.mock),
-                reducer: CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
+            store: Store(initialState: CompanyReducer.State(company: Company.mock)) {
+                CompanyReducer(userDefaults: UserDefaultsMock(), widgetCenter: WidgetCenterMock())
                     .dependency(\.geocodeUseCase, GeocodeUseCase(geocoder: CLGeocoderMock(), repository: CompanyAddressRepositoryMock()))
-            )
+            }
         )
     }
 }
