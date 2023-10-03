@@ -14,6 +14,7 @@ import SwiftUI
 @available(iOS 16.1, *)
 public struct CompanyView: View {
     private let store: StoreOf<CompanyReducer>
+    @State private var showDetailView = false
 
     public init(store: StoreOf<CompanyReducer>) {
         self.store = store
@@ -49,8 +50,12 @@ public struct CompanyView: View {
                 }
                 #endif
                 #if os(visionOS)
-                #else
                 ToolbarItem(placement: .topBarTrailing) {
+                    openDetailButton
+                }
+                #else
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    openDetailButton
                     Button(
                         action: {
                             viewStore.send(.registerToWidget)
@@ -63,6 +68,7 @@ public struct CompanyView: View {
                 }
                 #endif
             }
+            .navigationTitle(viewStore.company.name)
             .safeAreaPadding(.bottom)
             .onAppear {
                 viewStore.send(.geocode)
@@ -73,7 +79,29 @@ public struct CompanyView: View {
             .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
+            .sheet(isPresented: $showDetailView, onDismiss: hideDetailViewAction) {
+                CompanyDetailView(company: viewStore.company, onDismiss: hideDetailViewAction)
+                    .padding(16)
+                    .presentationDetents([.medium])
+            }
         }
+    }
+
+    private var openDetailButton: some View {
+        Button(
+            action: showDetailViewAction,
+            label: {
+                Image(systemName: "info.bubble")
+            }
+        )
+    }
+
+    private var showDetailViewAction: () -> Void {
+        { showDetailView = true }
+    }
+
+    private var hideDetailViewAction: () -> Void {
+        { showDetailView = false }
     }
 }
 

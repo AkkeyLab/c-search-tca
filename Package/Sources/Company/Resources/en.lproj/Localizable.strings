@@ -9,6 +9,11 @@
 // MARK: Common
 "common.ok" = "OK";
 
+// MARK: Company
+"company.number" = "Number";
+"company.name" = "Name";
+"company.office_address" = "Office Address";
+
 // MARK: Button
 "button.register_to_widget" = "Register to widget";
 "button.arrival_at_the_entrance" = "Arrival at the entrance";
