@@ -33,30 +33,34 @@ public struct CompanyView: View {
                         )
                     }
                 }
+            }
+            .toolbar {
+                #if canImport(ActivityKit)
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(
+                        action: {
+                            viewStore.send(.callToCompany)
+                        },
+                        label: {
+                            Label(L10n.Button.arrivalAtTheEntrance, systemImage: "phone.arrow.up.right")
+                                .font(.caption)
+                        }
+                    )
+                }
+                #endif
                 #if os(visionOS)
                 #else
-                Button(
-                    action: {
-                        viewStore.send(.registerToWidget)
-                    },
-                    label: {
-                        Label(L10n.Button.registerToWidget, systemImage: "pin")
-                            .font(.caption)
-                    }
-                )
-                .buttonStyle(RectangleButtonStyle())
-                #endif
-                #if canImport(ActivityKit)
-                Button(
-                    action: {
-                        viewStore.send(.callToCompany)
-                    },
-                    label: {
-                        Label(L10n.Button.arrivalAtTheEntrance, systemImage: "phone.arrow.up.right")
-                            .font(.caption)
-                    }
-                )
-                .buttonStyle(RectangleButtonStyle())
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(
+                        action: {
+                            viewStore.send(.registerToWidget)
+                        },
+                        label: {
+                            Label(L10n.Button.registerToWidget, systemImage: "pin")
+                                .font(.caption)
+                        }
+                    )
+                }
                 #endif
             }
             .safeAreaPadding(.bottom)
