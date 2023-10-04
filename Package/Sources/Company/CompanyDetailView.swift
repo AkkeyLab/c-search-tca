@@ -12,7 +12,7 @@ public struct CompanyDetailView: View {
     let company: Company
     let onDismiss: () -> Void
 
-    public init(company: Company, onDismiss: @escaping () -> Void) {
+    public init(company: Company, onDismiss: @escaping () -> Void = {}) {
         self.company = company
         self.onDismiss = onDismiss
     }

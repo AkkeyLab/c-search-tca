@@ -34,7 +34,7 @@ struct SearchApp: App {
         }
         WindowGroup(id: "company-detail") {
             if let selectedCompany {
-                CompanyDetailView(company: selectedCompany, onDismiss: {})
+                CompanyDetailView(company: selectedCompany)
             }
         }
     }
