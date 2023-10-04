@@ -10,23 +10,25 @@ import SwiftUI
 
 public struct CompanyDetailView: View {
     let company: Company
-    let onDismiss: () -> Void
+    let onDismiss: (() -> Void)?
 
-    public init(company: Company, onDismiss: @escaping () -> Void = {}) {
+    public init(company: Company, onDismiss: (() -> Void)? = nil) {
         self.company = company
         self.onDismiss = onDismiss
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Spacer()
-                Button(
-                    action: onDismiss,
-                    label: {
-                        Image(systemName: "xmark.circle.fill")
-                    }
-                )
+            if let onDismiss {
+                HStack {
+                    Spacer()
+                    Button(
+                        action: onDismiss,
+                        label: {
+                            Image(systemName: "xmark.circle.fill")
+                        }
+                    )
+                }
             }
             InfoView(title: L10n.Company.number, content: company.corporateNumber)
             InfoView(title: L10n.Company.name, content: company.name)
