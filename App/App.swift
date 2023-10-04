@@ -5,12 +5,15 @@
 //  Created by AkkeyLab on 2023/01/08.
 //
 
+import Company
+import Domain
 import Search
 import SwiftUI
 
 @main
 struct SearchApp: App {
     @State private var searchText: String = ""
+    @State private var selectedCompany: Company? = nil
 
     var body: some Scene {
         WindowGroup {
@@ -25,6 +28,14 @@ struct SearchApp: App {
                     }
                     searchText = companyName
                 }
+                .onPreferenceChange(SelectedCompanyPreferenceKey.self) { company in
+                    selectedCompany = company
+                }
+        }
+        WindowGroup(id: "company-detail") {
+            if let selectedCompany {
+                CompanyDetailView(company: selectedCompany, onDismiss: {})
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import SwiftUI
 public struct CompanyView: View {
     private let store: StoreOf<CompanyReducer>
     @State private var showDetailView = false
+    @Environment(\.openWindow) private var openWindow
 
     public init(store: StoreOf<CompanyReducer>) {
         self.store = store
@@ -51,11 +52,23 @@ public struct CompanyView: View {
                 #endif
                 #if os(visionOS)
                 ToolbarItem(placement: .topBarTrailing) {
-                    openDetailButton
+                    Button(
+                        action: {
+                            openWindow(id: "company-detail")
+                        },
+                        label: {
+                            Image(systemName: "info.bubble")
+                        }
+                    )
                 }
                 #else
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    openDetailButton
+                    Button(
+                        action: showDetailViewAction,
+                        label: {
+                            Image(systemName: "info.bubble")
+                        }
+                    )
                     Button(
                         action: {
                             viewStore.send(.registerToWidget)
@@ -85,15 +98,6 @@ public struct CompanyView: View {
                     .presentationDetents([.medium])
             }
         }
-    }
-
-    private var openDetailButton: some View {
-        Button(
-            action: showDetailViewAction,
-            label: {
-                Image(systemName: "info.bubble")
-            }
-        )
     }
 
     private var showDetailViewAction: () -> Void {

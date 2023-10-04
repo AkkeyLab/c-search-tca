@@ -8,11 +8,16 @@
 import Domain
 import SwiftUI
 
-struct CompanyDetailView: View {
+public struct CompanyDetailView: View {
     let company: Company
     let onDismiss: () -> Void
 
-    var body: some View {
+    public init(company: Company, onDismiss: @escaping () -> Void) {
+        self.company = company
+        self.onDismiss = onDismiss
+    }
+
+    public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Spacer()

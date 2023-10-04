@@ -51,6 +51,7 @@ public struct SearchView: View {
                     )
                 }
             }
+            .preference(key: SelectedCompanyPreferenceKey.self, value: selectedCompany)
             .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
