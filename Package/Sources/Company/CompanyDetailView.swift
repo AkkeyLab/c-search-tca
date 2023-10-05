@@ -9,8 +9,9 @@ import Domain
 import SwiftUI
 
 public struct CompanyDetailView: View {
-    let company: Company
-    let onDismiss: (() -> Void)?
+    private let company: Company
+    private let onDismiss: (() -> Void)?
+    @Environment(\.openWindow) private var openWindow
 
     public init(company: Company, onDismiss: (() -> Void)? = nil) {
         self.company = company
@@ -19,13 +20,22 @@ public struct CompanyDetailView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let onDismiss {
-                HStack {
-                    Spacer()
+            HStack {
+                Spacer()
+                if let onDismiss {
                     Button(
                         action: onDismiss,
                         label: {
                             Image(systemName: "xmark.circle.fill")
+                        }
+                    )
+                } else {
+                    Button(
+                        action: {
+                            openWindow(id: "search-main")
+                        },
+                        label: {
+                            Image(systemName: "magnifyingglass")
                         }
                     )
                 }

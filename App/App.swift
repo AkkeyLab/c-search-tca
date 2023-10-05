@@ -16,7 +16,7 @@ struct SearchApp: App {
     @State private var selectedCompany: Company? = nil
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "search-main") {
             ContentView(searchText: $searchText)
                 .onContinueUserActivity(NSUserActivityTypeBrowsingWeb) { userActivity in
                     guard let incomingURL = userActivity.webpageURL,
