@@ -32,6 +32,7 @@ struct SearchApp: App {
                     selectedCompany = company
                 }
         }
+        #if os(visionOS)
         WindowGroup(id: "company-detail") {
             if let selectedCompany {
                 CompanyDetailView(company: selectedCompany)
@@ -39,5 +40,6 @@ struct SearchApp: App {
             }
         }
         .defaultSize(width: 0.4, height: 0.2, depth: 1, in: .meters)
+        #endif
     }
 }
