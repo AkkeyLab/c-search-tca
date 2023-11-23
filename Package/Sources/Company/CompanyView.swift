@@ -24,7 +24,7 @@ public struct CompanyView: View {
     public var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
-                ForEach(viewStore.regions) { region in
+                if let region = viewStore.regions.first {
                     Map(position: .constant(.region(region))) {
                         MapContentBuilder.buildBlock(
                             Marker(
@@ -33,6 +33,13 @@ public struct CompanyView: View {
                                 coordinate: region.center
                             )
                         )
+                    }
+                    .overlay(alignment: .top) {
+                        GeometryReader { proxy in
+                            Spacer()
+                                .frame(width: proxy.size.width, height: .zero)
+                                .background(.ultraThinMaterial)
+                        }
                     }
                 }
             }
@@ -82,7 +89,6 @@ public struct CompanyView: View {
                 #endif
             }
             .navigationTitle(viewStore.company.name)
-            .safeAreaPadding(.bottom)
             .onAppear {
                 viewStore.send(.geocode)
             }
