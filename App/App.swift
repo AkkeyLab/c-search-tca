@@ -35,7 +35,7 @@ struct SearchApp: App {
         #if os(visionOS)
         WindowGroup(id: "company-detail") {
             if let selectedCompany {
-                CompanyDetailView(company: selectedCompany)
+                CompanyDetailView(company: selectedCompan, showSearchButton: true)
                     .padding(32)
             }
         }
@@ -43,7 +43,7 @@ struct SearchApp: App {
         #else
         WindowGroup(id: "company-detail") {
             if let selectedCompany {
-                CompanyDetailView(company: selectedCompany)
+                CompanyDetailView(company: selectedCompany, showSearchButton: true)
                     .padding(16)
             }
         }

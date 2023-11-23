@@ -91,8 +91,8 @@ public struct CompanyView: View {
             .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
                 viewStore.send(.confirmedError)
             }
-            .sheet(isPresented: $showDetailView, onDismiss: hideDetailViewAction) {
-                CompanyDetailView(company: viewStore.company, onDismiss: hideDetailViewAction)
+            .sheet(isPresented: $showDetailView) {
+                CompanyDetailView(company: viewStore.company, showSearchButton: false)
                     .padding(16)
                     .presentationDetents([.medium])
             }
@@ -101,10 +101,6 @@ public struct CompanyView: View {
 
     private var showDetailViewAction: () -> Void {
         { showDetailView = true }
-    }
-
-    private var hideDetailViewAction: () -> Void {
-        { showDetailView = false }
     }
 
     private var windowStyleInfoButton: some View {

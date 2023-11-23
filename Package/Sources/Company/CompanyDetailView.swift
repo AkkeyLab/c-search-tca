@@ -10,26 +10,19 @@ import SwiftUI
 
 public struct CompanyDetailView: View {
     private let company: Company
-    private let onDismiss: (() -> Void)?
+    private let showSearchButton: Bool
     @Environment(\.openWindow) private var openWindow
 
-    public init(company: Company, onDismiss: (() -> Void)? = nil) {
+    public init(company: Company, showSearchButton: Bool) {
         self.company = company
-        self.onDismiss = onDismiss
+        self.showSearchButton = showSearchButton
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Spacer()
-                if let onDismiss {
-                    Button(
-                        action: onDismiss,
-                        label: {
-                            Image(systemName: "xmark.circle.fill")
-                        }
-                    )
-                } else {
+            if showSearchButton {
+                HStack {
+                    Spacer()
                     Button(
                         action: {
                             openWindow(id: "search-main")
