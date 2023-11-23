@@ -40,6 +40,13 @@ struct SearchApp: App {
             }
         }
         .defaultSize(width: 0.4, height: 0.2, depth: 1, in: .meters)
+        #else
+        WindowGroup(id: "company-detail") {
+            if let selectedCompany {
+                CompanyDetailView(company: selectedCompany)
+                    .padding(16)
+            }
+        }
         #endif
     }
 }

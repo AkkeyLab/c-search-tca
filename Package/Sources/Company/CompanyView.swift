@@ -59,32 +59,25 @@ public struct CompanyView: View {
                 #endif
                 #if os(visionOS)
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(
-                        action: {
-                            openWindow(id: "company-detail")
-                        },
-                        label: {
-                            Image(systemName: "info.bubble")
-                        }
-                    )
+                    windowStyleInfoButton
+                }
+                #elseif os(macOS)
+                ToolbarItemGroup(placement: .navigation) {
+                    windowStyleInfoButton
+                    registerToWidgetButton {
+                        viewStore.send(.registerToWidget)
+                    }
                 }
                 #else
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button(
-                        action: showDetailViewAction,
-                        label: {
-                            Image(systemName: "info.bubble")
-                        }
-                    )
-                    Button(
-                        action: {
-                            viewStore.send(.registerToWidget)
-                        },
-                        label: {
-                            Label(L10n.Button.registerToWidget, systemImage: "pin")
-                                .font(.caption)
-                        }
-                    )
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        windowStyleInfoButton
+                    } else {
+                        sheetStyleInfoButton
+                    }
+                    registerToWidgetButton {
+                        viewStore.send(.registerToWidget)
+                    }
                 }
                 #endif
             }
@@ -112,6 +105,36 @@ public struct CompanyView: View {
 
     private var hideDetailViewAction: () -> Void {
         { showDetailView = false }
+    }
+
+    private var windowStyleInfoButton: some View {
+        Button(
+            action: {
+                openWindow(id: "company-detail")
+            },
+            label: {
+                Image(systemName: "info.bubble")
+            }
+        )
+    }
+
+    private var sheetStyleInfoButton: some View {
+        Button(
+            action: showDetailViewAction,
+            label: {
+                Image(systemName: "info.bubble")
+            }
+        )
+    }
+
+    private func registerToWidgetButton(_ action: @escaping () -> Void) -> some View {
+        Button(
+            action: action,
+            label: {
+                Label(L10n.Button.registerToWidget, systemImage: "pin")
+                    .font(.caption)
+            }
+        )
     }
 }
 
