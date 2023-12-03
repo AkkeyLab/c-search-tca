@@ -1,0 +1,46 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "AkkeyLab, inc." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AkkeyLab株式会社"
+          }
+        }
+      }
+    },
+    "Company Name" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "宛名表示"
+          }
+        }
+      }
+    },
+    "Show your favorite company name" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お気に入りの会社名を表示します"
+          }
+        }
+      }
+    },
+    "Unregistered" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未登録"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

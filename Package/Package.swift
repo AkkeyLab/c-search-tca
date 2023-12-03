@@ -28,7 +28,6 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.2.0"),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1"),
-        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
     ],
     targets: [
         .target(
@@ -40,9 +39,6 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Company",
@@ -52,9 +48,6 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Domain",
@@ -83,18 +76,12 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Activity",
             dependencies: [],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .testTarget(
             name: "PackageTests",

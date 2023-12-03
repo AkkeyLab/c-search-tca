@@ -32,11 +32,11 @@ public struct SearchView: View {
                 List(viewStore.companies, id: \.id, selection: $selectedCompany) { company in
                     NavigationLink(company.name, value: company)
                 }
-                .navigationTitle(L10n.NavigationTitle.corporations)
+                .navigationTitle(String(localized: "Corporations"))
                 .searchable(
                     text: $searchText,
                     placement: searchablePlacement,
-                    prompt: Text(L10n.Placeholder.enterCompanyName)
+                    prompt: Text("Enter company name")
                 )
                 .onSubmit(of: .search) {
                     viewStore.send(.search(companyName: searchText))
@@ -52,7 +52,7 @@ public struct SearchView: View {
                 }
             }
             .preference(key: SelectedCompanyPreferenceKey.self, value: selectedCompany)
-            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
+            .errorAlert(error: viewStore.error, buttonTitle: String(localized: "OK")) {
                 viewStore.send(.confirmedError)
             }
         }

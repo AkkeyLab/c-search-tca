@@ -33,9 +33,9 @@ public struct CompanyDetailView: View {
                     )
                 }
             }
-            InfoView(title: L10n.Company.number, content: company.corporateNumber)
-            InfoView(title: L10n.Company.name, content: company.name)
-            InfoView(title: L10n.Company.officeAddress, content: company.address)
+            InfoView(title: String(localized: "Company Number"), content: company.corporateNumber)
+            InfoView(title: String(localized: "Company Name"), content: company.name)
+            InfoView(title: String(localized: "Office Address"), content: company.address)
         }
     }
 

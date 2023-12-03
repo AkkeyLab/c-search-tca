@@ -20,13 +20,13 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (CompanyEntry) -> Void) {
-        completion(CompanyEntry(date: Date(), name: L10n.Widget.snapshot))
+        completion(CompanyEntry(date: Date(), name: String(localized: "AkkeyLab, inc.")))
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<CompanyEntry>) -> Void) {
         guard let entryDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date()) else { return }
 
-        let companyName = userDefaults.string(forKey: "company-name-for-widget") ?? L10n.Widget.unregisteredCompanyName
+        let companyName = userDefaults.string(forKey: "company-name-for-widget") ?? String(localized: "Unregistered")
         let entry = CompanyEntry(date: entryDate, name: companyName)
 
         completion(Timeline(entries: [entry], policy: .atEnd))
