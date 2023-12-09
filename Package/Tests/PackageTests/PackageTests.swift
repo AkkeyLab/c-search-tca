@@ -27,7 +27,7 @@ final class PackageTests: XCTestCase {
         let company = Company(
             id: .zero,
             corporateNumber: "8011001150296",
-            name: "ＡｋｋｅｙＬａｂ株式会社",
+            name: "AkkeyLab株式会社",
             prefectureName: "東京都",
             cityName: "渋谷区",
             streetNumber: "道玄坂１丁目１６－６二葉ビル８Ｂ",
@@ -211,7 +211,8 @@ final class PackageTests: XCTestCase {
 
         XCTAssertEqual(corporation.id, .zero)
         XCTAssertEqual(corporationEntity.corporateNumber, corporation.corporateNumber)
-        XCTAssertEqual(corporationEntity.name, corporation.name)
+        let fullWidthName = try XCTUnwrap(corporation.name.applyingTransform(.fullwidthToHalfwidth, reverse: true))
+        XCTAssertEqual(corporationEntity.name, fullWidthName)
         XCTAssertEqual(corporationEntity.prefectureName, corporation.prefectureName)
         XCTAssertEqual(corporationEntity.cityName, corporation.cityName)
         XCTAssertEqual(corporationEntity.streetNumber, corporation.streetNumber)
