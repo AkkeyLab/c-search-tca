@@ -56,7 +56,11 @@ public struct VisitLiveActivity: Widget {
 
     private func mainContent(context: ActivityViewContext<VisitAttributes>) -> some View {
         VStack {
-            Label("The person in charge will come. Please wait for a little while", systemImage: "phone.connection")
+            let labelString = String(
+                localized: "The person in charge will come. Please wait for a little while",
+                bundle: .module
+            )
+            Label(labelString, systemImage: "phone.connection")
                 .font(.caption)
                 .foregroundColor(.white)
                 .padding(.horizontal, 16)
@@ -68,7 +72,10 @@ public struct VisitLiveActivity: Widget {
     }
 
     private var brandLabel: some View {
-        Label("c-search", systemImage: "building.2.crop.circle")
+        Label(
+            String(localized: "c-search", bundle: .module),
+            systemImage: "building.2.crop.circle"
+        )
     }
 
     private var statusView: some View {

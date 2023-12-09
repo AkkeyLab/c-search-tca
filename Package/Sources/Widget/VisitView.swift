@@ -16,8 +16,8 @@ public struct Visit: Widget {
         StaticConfiguration(kind: kind, provider: Provider(userDefaults: .group)) { entry in
             VisitView(entry: entry)
         }
-        .configurationDisplayName("Company Name")
-        .description("Show your favorite company name")
+        .configurationDisplayName(String(localized: "Company Name", bundle: .module))
+        .description(String(localized: "Show your favorite company name", bundle: .module))
         .supportedFamilies(families)
     }
 
@@ -38,7 +38,7 @@ public struct VisitView: View {
     public var body: some View {
         HStack(spacing: 8) {
             Image(systemName: "building.2.crop.circle")
-            Text(entry.name ?? String(localized: "Unregistered"))
+            Text(entry.name ?? String(localized: "Unregistered", bundle: .module))
                 .font(.body)
                 .redacted(reason: entry.name == nil ? .placeholder : [])
         }
@@ -47,6 +47,11 @@ public struct VisitView: View {
 
 public extension VisitView {
     static var mock: Self {
-        VisitView(entry: CompanyEntry(date: Date(), name: String(localized: "AkkeyLab, inc.")))
+        VisitView(
+            entry: CompanyEntry(
+                date: Date(),
+                name: String(localized: "AkkeyLab, inc.", bundle: .module)
+            )
+        )
     }
 }

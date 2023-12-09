@@ -33,9 +33,18 @@ public struct CompanyDetailView: View {
                     )
                 }
             }
-            InfoView(title: String(localized: "Company Number"), content: company.corporateNumber)
-            InfoView(title: String(localized: "Company Name"), content: company.name)
-            InfoView(title: String(localized: "Office Address"), content: company.address)
+            InfoView(
+                title: String(localized: "Company Number", bundle: .module),
+                content: company.corporateNumber
+            )
+            InfoView(
+                title: String(localized: "Company Name", bundle: .module),
+                content: company.name
+            )
+            InfoView(
+                title: String(localized: "Office Address", bundle: .module),
+                content: company.address
+            )
         }
     }
 

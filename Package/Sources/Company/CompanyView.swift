@@ -51,7 +51,11 @@ public struct CompanyView: View {
                             viewStore.send(.callToCompany)
                         },
                         label: {
-                            Label("Arrival at the entrance", systemImage: "phone.arrow.up.right")
+                            let labelString = String(
+                                localized: "Arrival at the entrance",
+                                bundle: .module
+                            )
+                            Label(labelString, systemImage: "phone.arrow.up.right")
                                 .font(.caption)
                         }
                     )
@@ -88,7 +92,7 @@ public struct CompanyView: View {
             .onDisappear {
                 viewStore.send(.cancelCallToCompany)
             }
-            .errorAlert(error: viewStore.error, buttonTitle: String(localized: "OK")) {
+            .errorAlert(error: viewStore.error, buttonTitle: String(localized: "OK", bundle: .module)) {
                 viewStore.send(.confirmedError)
             }
             .sheet(isPresented: $showDetailView) {
@@ -127,7 +131,11 @@ public struct CompanyView: View {
         Button(
             action: action,
             label: {
-                Label("Register to widget", systemImage: "pin")
+                let labelString = String(
+                    localized: "Register to widget",
+                    bundle: .module
+                )
+                Label(labelString, systemImage: "pin")
                     .font(.caption)
             }
         )
