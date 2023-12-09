@@ -7,12 +7,18 @@
 
 import Foundation
 
-public enum HTTPMethod: String {
-    case get = "GET"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-    case patch = "PATCH"
+public struct Uppercase: Equatable {
+    let uppercased: String
+}
+
+extension Uppercase: ExpressibleByStringLiteral {
+    public init(stringLiteral: String) {
+        uppercased = stringLiteral.uppercased()
+    }
+}
+
+public enum HTTPMethod: Uppercase {
+    case get, post, put, delete, patch
 }
 
 public protocol APIRequest {
@@ -32,7 +38,7 @@ extension APIRequest {
         var components = URLComponents(url: url, resolvingAgainstBaseURL: true)!
         components.queryItems = queryItems
         var request = URLRequest(url: components.url!)
-        request.httpMethod = method.rawValue
+        request.httpMethod = method.rawValue.uppercased
         return request
     }
 }
