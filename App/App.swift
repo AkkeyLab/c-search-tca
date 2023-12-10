@@ -50,3 +50,13 @@ struct SearchApp: App {
         #endif
     }
 }
+
+#if DEBUG
+/// ⚠️ NOTE
+/// This is to reflect the language setting of SwiftPM
+struct Dummy: View {
+    var body: some View {
+        Text("Dummy")
+    }
+}
+#endif

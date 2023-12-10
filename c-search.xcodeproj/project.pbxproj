@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F405094F297C501A00C25459 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4050951297C501A00C25459 /* Localizable.strings */; };
+		F42BB45C2B259BD50011222D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F42BB45B2B259BD50011222D /* Localizable.xcstrings */; };
 		F46CEF1529B6538F0096B6E1 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = F46CEF1429B6538F0096B6E1 /* Search */; };
 		F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */; };
 		F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */; };
@@ -69,8 +69,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F4050950297C501A00C25459 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		F4050952297C502E00C25459 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F42BB45B2B259BD50011222D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "c-search-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -174,7 +173,7 @@
 				F4C37D33296AEE2100D0084B /* App.swift */,
 				F4C37D37296AEE2200D0084B /* Assets.xcassets */,
 				F4C37D39296AEE2200D0084B /* PreviewContent */,
-				F4050951297C501A00C25459 /* Localizable.strings */,
+				F42BB45B2B259BD50011222D /* Localizable.xcstrings */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -333,7 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */,
-				F405094F297C501A00C25459 /* Localizable.strings in Resources */,
+				F42BB45C2B259BD50011222D /* Localizable.xcstrings in Resources */,
 				F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,18 +435,6 @@
 			targetProxy = F4FDC7F92998D9A10057D80A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F4050951297C501A00C25459 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4050950297C501A00C25459 /* en */,
-				F4050952297C502E00C25459 /* ja */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F46CEF4F29BD9D610096B6E1 /* Debug */ = {
@@ -570,6 +557,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,6 +613,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
