@@ -14,6 +14,8 @@ import SwiftUI
 @available(iOS 16.1, *)
 public struct CompanyView: View {
     private let store: StoreOf<CompanyReducer>
+    @State private var showDetailView = false
+    @Environment(\.openWindow) private var openWindow
 
     public init(store: StoreOf<CompanyReducer>) {
         self.store = store
@@ -22,49 +24,121 @@ public struct CompanyView: View {
     public var body: some View {
         WithViewStore(store, observe: { $0 }) { viewStore in
             VStack {
-                Text(viewStore.company.name)
-                ForEach(viewStore.regions) { region in
-                    Map(
-                        coordinateRegion: .constant(region),
-                        annotationItems: [region],
-                        annotationContent: { location in
-                            MapMarker(coordinate: location.center)
+                if let region = viewStore.regions.first {
+                    Map(position: .constant(.region(region))) {
+                        MapContentBuilder.buildBlock(
+                            Marker(
+                                viewStore.company.name,
+                                systemImage: "building.2.crop.circle.fill",
+                                coordinate: region.center
+                            )
+                        )
+                    }
+                    .overlay(alignment: .top) {
+                        GeometryReader { proxy in
+                            Spacer()
+                                .frame(width: proxy.size.width, height: .zero)
+                                .background(.ultraThinMaterial)
+                        }
+                    }
+                }
+            }
+            .toolbar {
+                #if canImport(ActivityKit)
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(
+                        action: {
+                            viewStore.send(.callToCompany)
+                        },
+                        label: {
+                            let labelString = String(
+                                localized: "Arrival at the entrance",
+                                bundle: .module
+                            )
+                            Label(labelString, systemImage: "phone.arrow.up.right")
+                                .font(.caption)
                         }
                     )
                 }
-                Button(
-                    action: {
+                #endif
+                #if os(visionOS)
+                ToolbarItem(placement: .topBarTrailing) {
+                    windowStyleInfoButton
+                }
+                #elseif os(macOS)
+                ToolbarItemGroup(placement: .navigation) {
+                    windowStyleInfoButton
+                    registerToWidgetButton {
                         viewStore.send(.registerToWidget)
-                    },
-                    label: {
-                        Label(L10n.Button.registerToWidget, systemImage: "pin")
-                            .font(.caption)
                     }
-                )
-                .buttonStyle(RectangleButtonStyle())
-                #if canImport(ActivityKit)
-                Button(
-                    action: {
-                        viewStore.send(.callToCompany)
-                    },
-                    label: {
-                        Label(L10n.Button.arrivalAtTheEntrance, systemImage: "phone.arrow.up.right")
-                            .font(.caption)
+                }
+                #else
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        windowStyleInfoButton
+                    } else {
+                        sheetStyleInfoButton
                     }
-                )
-                .buttonStyle(RectangleButtonStyle())
+                    registerToWidgetButton {
+                        viewStore.send(.registerToWidget)
+                    }
+                }
                 #endif
             }
+            .navigationTitle(viewStore.company.name)
             .onAppear {
                 viewStore.send(.geocode)
             }
             .onDisappear {
                 viewStore.send(.cancelCallToCompany)
             }
-            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
+            .errorAlert(error: viewStore.error, buttonTitle: String(localized: "OK", bundle: .module)) {
                 viewStore.send(.confirmedError)
             }
+            .sheet(isPresented: $showDetailView) {
+                CompanyDetailView(company: viewStore.company, showSearchButton: false)
+                    .padding(16)
+                    .presentationDetents([.medium])
+            }
         }
+    }
+
+    private var showDetailViewAction: () -> Void {
+        { showDetailView = true }
+    }
+
+    private var windowStyleInfoButton: some View {
+        Button(
+            action: {
+                openWindow(id: "company-detail")
+            },
+            label: {
+                Image(systemName: "info.bubble")
+            }
+        )
+    }
+
+    private var sheetStyleInfoButton: some View {
+        Button(
+            action: showDetailViewAction,
+            label: {
+                Image(systemName: "info.bubble")
+            }
+        )
+    }
+
+    private func registerToWidgetButton(_ action: @escaping () -> Void) -> some View {
+        Button(
+            action: action,
+            label: {
+                let labelString = String(
+                    localized: "Register to widget",
+                    bundle: .module
+                )
+                Label(labelString, systemImage: "pin")
+                    .font(.caption)
+            }
+        )
     }
 }
 

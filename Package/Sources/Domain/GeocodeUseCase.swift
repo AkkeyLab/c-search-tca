@@ -9,7 +9,11 @@ import CoreLocation
 import Data
 
 public protocol CLGeocoderProtocol {
+    #if os(visionOS)
+    func geocodeAddressString(_ addressString: String) async throws -> [CLLocation]
+    #else
     func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation]
+    #endif
 }
 
 public protocol GeocodeUseCaseProtocol {
@@ -31,7 +35,13 @@ public final class GeocodeUseCase: GeocodeUseCaseProtocol {
         guard cache.isEmpty else {
             return cache
         }
-        let placemarks: [CLLocation] = try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
+        let placemarks: [CLLocation] = try await {
+            #if os(visionOS)
+            try await geocoder.geocodeAddressString(address)
+            #else
+            try await geocoder.geocodeAddressString(address, in: nil, preferredLocale: .jp)
+            #endif
+        }()
         let coordinate = placemarks.map(\.coordinate)
         try? createCache(address: address, coordinate: coordinate)
         return coordinate
@@ -61,8 +71,15 @@ private extension Locale {
 }
 
 extension CLGeocoder: CLGeocoderProtocol {
+    #if os(visionOS)
+    public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
+        try await geocodeAddressString(addressString)
+            .compactMap(\.location)
+    }
+    #else
     public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
         try await geocodeAddressString(addressString, in: region, preferredLocale: locale)
             .compactMap(\.location)
     }
+    #endif
 }

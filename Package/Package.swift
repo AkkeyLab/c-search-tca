@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,8 +7,9 @@ let package = Package(
     name: "Package",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v16),
-        .macOS(.v13),
+        .iOS(.v17),
+        .macOS(.v14),
+        .visionOS(.v1),
     ],
     products: [
         .library(
@@ -26,9 +27,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.2.0"),
-        .package(url: "https://github.com/ishkawa/APIKit", from: "5.4.0"),
         .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1"),
-        .package(url: "https://github.com/SwiftGen/SwiftGenPlugin", from: "6.6.2"),
     ],
     targets: [
         .target(
@@ -40,9 +39,6 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Company",
@@ -52,9 +48,6 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Domain",
@@ -65,7 +58,7 @@ let package = Package(
             ]),
         .target(
             name: "Data",
-            dependencies: ["APIKit", "XMLCoder", "Extension"]),
+            dependencies: ["XMLCoder", "Extension"]),
         .target(
             name: "Extension",
             dependencies: []),
@@ -83,18 +76,12 @@ let package = Package(
             ],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .target(
             name: "Activity",
             dependencies: [],
             resources: [
                 .process("Resources"),
-            ],
-            plugins: [
-                .plugin(name: "SwiftGenPlugin", package: "SwiftGenPlugin"),
             ]),
         .testTarget(
             name: "PackageTests",

@@ -1,0 +1,26 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "c-search" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "c-search"
+          }
+        }
+      }
+    },
+    "The person in charge will come. Please wait for a little while" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "担当者が参ります。今しばらくお待ちください"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,9 +1,0 @@
-input_dir: Resources
-output_dir: ${DERIVED_SOURCES_DIR}
-
-strings:
-  inputs:
-    - en.lproj
-  outputs:
-    - templateName: structured-swift5
-      output: Localizable.swift

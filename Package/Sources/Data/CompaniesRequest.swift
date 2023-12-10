@@ -5,10 +5,9 @@
 //  Created by AkkeyLab on 2022/12/30.
 //
 
-import APIKit
 import Foundation
 
-public struct CompaniesRequest: Request {
+public struct CompaniesRequest: APIRequest {
     public typealias Response = CompaniesEntity
 
     // https://www.houjin-bangou.nta.go.jp/documents/k-web-api-kinou-gaiyo.pdf#page=24
@@ -16,7 +15,7 @@ public struct CompaniesRequest: Request {
         URL(string: "https://api.houjin-bangou.nta.go.jp")!
     }
 
-    public var method: APIKit.HTTPMethod {
+    public var method: HTTPMethod {
         .get
     }
 
@@ -24,19 +23,15 @@ public struct CompaniesRequest: Request {
         "/4/name"
     }
 
-    public var queryParameters: [String : Any]? {
+    public var queryItems: [URLQueryItem] {
         [
-            "id": apiKey,
-            "name": name,
-            "type": type.rawValue,
-            "mode": mode.rawValue,
-            "kind": kind.rawValue,
-            "close": hasClosed ? 1 : Int.zero
+            .init(name: "id", value: apiKey),
+            .init(name: "name", value: name),
+            .init(name: "type", value: type.rawValue),
+            .init(name: "mode", value: mode.rawValue),
+            .init(name: "kind", value: kind.rawValue),
+            .init(name: "close", value: "\(hasClosed ? 1 : Int.zero)")
         ]
-    }
-
-    public var dataParser: DataParser {
-        XmlDataParser<Response>()
     }
 
     private let apiKey: String

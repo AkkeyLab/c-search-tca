@@ -1,4 +1,3 @@
-import APIKit
 import ComposableArchitecture
 import MapKit
 import XCTest
@@ -6,13 +5,11 @@ import XCTest
 @testable import Domain
 
 final class PackageTests: XCTestCase {
-    var adapter: TestSessionAdapter!
-    var session: Session!
+    var session: TestSession!
 
     override func setUp() {
         super.setUp()
-        adapter = TestSessionAdapter()
-        session = Session(adapter: adapter)
+        session = TestSession()
     }
 
     // Test the following ranges
@@ -30,7 +27,7 @@ final class PackageTests: XCTestCase {
         let company = Company(
             id: .zero,
             corporateNumber: "8011001150296",
-            name: "ＡｋｋｅｙＬａｂ株式会社",
+            name: "AkkeyLab株式会社",
             prefectureName: "東京都",
             cityName: "渋谷区",
             streetNumber: "道玄坂１丁目１６－６二葉ビル８Ｂ",
@@ -80,10 +77,17 @@ final class PackageTests: XCTestCase {
     @MainActor
     func testSuccessCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 XCTFail()
                 return []
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -149,9 +153,15 @@ final class PackageTests: XCTestCase {
     @MainActor
     func testFailureCompanyReducer() async {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 throw TestError.test
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                throw TestError.test
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -201,7 +211,8 @@ final class PackageTests: XCTestCase {
 
         XCTAssertEqual(corporation.id, .zero)
         XCTAssertEqual(corporationEntity.corporateNumber, corporation.corporateNumber)
-        XCTAssertEqual(corporationEntity.name, corporation.name)
+        let fullWidthName = try XCTUnwrap(corporation.name.applyingTransform(.fullwidthToHalfwidth, reverse: true))
+        XCTAssertEqual(corporationEntity.name, fullWidthName)
         XCTAssertEqual(corporationEntity.prefectureName, corporation.prefectureName)
         XCTAssertEqual(corporationEntity.cityName, corporation.cityName)
         XCTAssertEqual(corporationEntity.streetNumber, corporation.streetNumber)
@@ -212,7 +223,7 @@ final class PackageTests: XCTestCase {
     // Test the following ranges
     // ApiRequest --> Gateway
     func testRecentlyEstablishedCompany() async throws {
-        adapter.data = try XCTUnwrap(CompaniesEntity.mockData)
+        session.data = try XCTUnwrap(CompaniesEntity.mockData)
 
         let request = CompaniesRequest(
             apiKey: "",
@@ -222,7 +233,7 @@ final class PackageTests: XCTestCase {
             kind: .normal,
             hasClosed: false
         )
-        let result = try await session.response(for: request)
+        let result = try await APIClient(session: session).send(request: request)
         XCTAssertEqual(result.lastUpdateDate.description, "2022-12-27 15:00:00 +0000")
         XCTAssertEqual(result.count, 1)
         XCTAssertEqual(result.divideNumber, 1)
@@ -269,11 +280,19 @@ final class PackageTests: XCTestCase {
 
     func testCaching() async throws {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 [
                     CLLocation(latitude: 35.652832, longitude: 139.839478)
                 ]
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                [
+                    CLLocation(latitude: 35.652832, longitude: 139.839478)
+                ]
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {
@@ -299,10 +318,17 @@ final class PackageTests: XCTestCase {
 
     func testCacheLoad() async throws {
         struct CLGeocoderMock: CLGeocoderProtocol {
-            func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+            #if os(visionOS)
+            public func geocodeAddressString(_ addressString: String) async throws -> [CLLocation] {
                 XCTFail()
                 return []
             }
+            #else
+            public func geocodeAddressString(_ addressString: String, in region: CLRegion?, preferredLocale locale: Locale?) async throws -> [CLLocation] {
+                XCTFail()
+                return []
+            }
+            #endif
         }
 
         struct CompanyAddressRepositoryMock: CompanyAddressRepositoryProtocol {

@@ -9,7 +9,10 @@ import Company
 import ComposableArchitecture
 import Domain
 import SwiftUI
+
+#if canImport(WidgetKit)
 import WidgetKit
+#endif
 
 @available(iOS 16.1, *)
 public struct SearchView: View {
@@ -28,11 +31,11 @@ public struct SearchView: View {
                 List(viewStore.companies, id: \.id, selection: $selectedCompany) { company in
                     NavigationLink(company.name, value: company)
                 }
-                .navigationTitle(L10n.NavigationTitle.corporations)
+                .navigationTitle(String(localized: "Corporations", bundle: .module))
                 .searchable(
                     text: $searchText,
                     placement: searchablePlacement,
-                    prompt: Text(L10n.Placeholder.enterCompanyName)
+                    prompt: Text("Enter company name", bundle: .module)
                 )
                 .onSubmit(of: .search) {
                     viewStore.send(.search(companyName: searchText))
@@ -41,13 +44,14 @@ public struct SearchView: View {
                 if let company = selectedCompany {
                     CompanyView(
                         store: Store(initialState: CompanyReducer.State(company: company)) {
-                            CompanyReducer(userDefaults: UserDefaults.group, widgetCenter: WidgetCenter.shared)
+                            CompanyReducer(userDefaults: UserDefaults.group)
                                 .dependency(\.geocodeUseCase, GeocodeUseCase())
                         }
                     )
                 }
             }
-            .errorAlert(error: viewStore.error, buttonTitle: L10n.Common.ok) {
+            .preference(key: SelectedCompanyPreferenceKey.self, value: selectedCompany)
+            .errorAlert(error: viewStore.error, buttonTitle: String(localized: "OK", bundle: .module)) {
                 viewStore.send(.confirmedError)
             }
         }
@@ -58,6 +62,8 @@ public struct SearchView: View {
         return .navigationBarDrawer(displayMode: .always)
         #elseif os(macOS)
         return .automatic
+        #elseif os(visionOS)
+        return .navigationBarDrawer(displayMode: .always)
         #endif
     }
 }
@@ -73,5 +79,19 @@ private struct SearchViewwPreviews: PreviewProvider {
             },
             searchText: .constant("")
         )
+    }
+}
+
+@available(iOS 16.1, *)
+extension CompanyReducer {
+    init(userDefaults: UserDefaultsProtocol) {
+        #if os(visionOS)
+        struct Dummy: WidgetCenterProtocol {
+            func reloadAllTimelines() {}
+        }
+        self.init(userDefaults: userDefaults, widgetCenter: Dummy())
+        #else
+        self.init(userDefaults: userDefaults, widgetCenter: WidgetCenter.shared)
+        #endif
     }
 }
