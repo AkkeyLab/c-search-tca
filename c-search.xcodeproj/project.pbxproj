@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F42BB45C2B259BD50011222D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = F42BB45B2B259BD50011222D /* Localizable.xcstrings */; };
+		F42BB45E2B2622680011222D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = F42BB45D2B261F280011222D /* PrivacyInfo.xcprivacy */; };
 		F46CEF1529B6538F0096B6E1 /* Search in Frameworks */ = {isa = PBXBuildFile; productRef = F46CEF1429B6538F0096B6E1 /* Search */; };
 		F46CEF3B29BD9D600096B6E1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */; };
 		F46CEF3D29BD9D600096B6E1 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		F42BB45B2B259BD50011222D /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		F42BB45D2B261F280011222D /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		F46CEF3929BD9D600096B6E1 /* c-search-widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "c-search-widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F46CEF3A29BD9D600096B6E1 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F46CEF3C29BD9D600096B6E1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -172,8 +174,9 @@
 			children = (
 				F4C37D33296AEE2100D0084B /* App.swift */,
 				F4C37D37296AEE2200D0084B /* Assets.xcassets */,
-				F4C37D39296AEE2200D0084B /* PreviewContent */,
 				F42BB45B2B259BD50011222D /* Localizable.xcstrings */,
+				F42BB45D2B261F280011222D /* PrivacyInfo.xcprivacy */,
+				F4C37D39296AEE2200D0084B /* PreviewContent */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -284,7 +287,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F46CEF3829BD9D600096B6E1 = {
 						CreatedOnToolsVersion = 14.2;
@@ -333,6 +336,7 @@
 			files = (
 				F4C37D3B296AEE2200D0084B /* PreviewAssets.xcassets in Resources */,
 				F42BB45C2B259BD50011222D /* Localizable.xcstrings in Resources */,
+				F42BB45E2B2622680011222D /* PrivacyInfo.xcprivacy in Resources */,
 				F4C37D38296AEE2200D0084B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +513,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -542,6 +547,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -571,6 +577,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -604,6 +611,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
