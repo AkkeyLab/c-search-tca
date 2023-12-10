@@ -10,8 +10,7 @@ import ComposableArchitecture
 import Domain
 import SwiftUI
 
-#if os(visionOS)
-#else
+#if canImport(WidgetKit)
 import WidgetKit
 #endif
 

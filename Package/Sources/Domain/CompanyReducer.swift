@@ -10,8 +10,7 @@ import Data
 import MapKit
 import XCTestDynamicOverlay
 
-#if os(visionOS)
-#else
+#if canImport(WidgetKit)
 import WidgetKit
 #endif
 
@@ -26,8 +25,7 @@ public protocol WidgetCenterProtocol {
 
 extension UserDefaults: UserDefaultsProtocol {}
 
-#if os(visionOS)
-#else
+#if canImport(WidgetKit)
 extension WidgetCenter: WidgetCenterProtocol {}
 #endif
 
