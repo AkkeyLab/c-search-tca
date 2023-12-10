@@ -48,7 +48,7 @@ actor ActivityActor: GlobalActor {
 
     func end(companyName: String) async {
         guard let activity = activities[companyName], let activity else { return }
-        await activity.end()
+        await activity.end(nil)
         activities[companyName] = nil
     }
 }
