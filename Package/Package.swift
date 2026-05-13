@@ -27,7 +27,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.15.0"),
-        .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.17.1"),
+        .package(url: "https://github.com/CoreOffice/XMLCoder", from: "0.18.2"),
     ],
     targets: [
         .target(
